@@ -4,65 +4,144 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hasan — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; margin:0; background:#0b1020; color:#e2e8f0; line-height:1.6; }
-    .wrap { max-width:900px; margin:0 auto; padding:24px; }
-    header { display:flex; justify-content:space-between; align-items:center; padding:16px 0; border-bottom:1px solid #1f2937; }
-    nav a { color:#e2e8f0; text-decoration:none; margin-left:14px; }
-    h1 { margin:12px 0 8px; }
-    .muted { color:#94a3b8; }
-    section { padding:24px 0; border-bottom:1px solid #1f2937; }
-    .card { background:#111827; border:1px solid #1f2937; border-radius:12px; padding:14px; margin:10px 0; }
-    footer { padding:24px 0; color:#94a3b8; }
-    .btn { display:inline-block; padding:10px 14px; border-radius:8px; border:1px solid #1f2937; color:#0b1020; background:#38bdf8; text-decoration:none; font-weight:600; }
+    :root{
+      --bg:#0b1020; --panel:#0f172a; --text:#e2e8f0; --muted:#94a3b8; --border:#1f2937;
+      --accent:#3b82f6; /* blue for the logo */
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; color:var(--text); font-family:'Inter',system-ui,Segoe UI,Arial,sans-serif; line-height:1.65;
+      background: radial-gradient(1000px 600px at 10% -10%, rgba(56,189,248,.12), transparent 40%),
+                  radial-gradient(900px 600px at 110% 0%, rgba(96,165,250,.10), transparent 35%),
+                  var(--bg);
+    }
+
+    /* ---- NAV / LAYOUT ---- */
+    .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+    header{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:saturate(1.1) blur(10px);
+      background:linear-gradient(to bottom, rgba(10,14,28,.7), rgba(10,14,28,.25) 60%, transparent);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0;}
+    .brand{font-weight:800; letter-spacing:.3px; color:var(--accent);} /* blue brand */
+    .nav a{color:var(--text); text-decoration:none; margin-left:14px; position:relative}
+    .nav a::after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--accent); transition:width .25s ease;}
+    .nav a:hover::after{width:100%}
+
+    section{padding:36px 0; border-top:1px solid var(--border)}
+    h2{font-size:26px; margin:0 0 10px}
+    .muted{color:var(--muted)}
+    .card{background:#111827;border:1px solid var(--border);border-radius:16px;padding:16px}
+
+    /* ---- INTRO ANIMATION ---- */
+    .intro {
+      position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+      display: grid; place-items: center; background: transparent; /* see page behind */
+    }
+    .intro__logo {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(3); /* start big & centered */
+      color: var(--accent); font-weight: 800; letter-spacing: .5px;
+      font-size: clamp(42px, 10vw, 120px);
+      will-change: transform, top, left, opacity;
+      animation: flyToCorner 1.6s cubic-bezier(.2,.8,.25,1) forwards,
+                 fadeOut 1.2s ease 1.2s forwards;
+      text-shadow: 0 10px 40px rgba(59,130,246,.35);
+    }
+    @keyframes flyToCorner {
+      0%   { top:50%; left:50%; transform:translate(-50%,-50%) scale(3); }
+      70%  { top: 18px; left: 22px; transform: translate(0,0) scale(1.06); }
+      100% { top: 18px; left: 22px; transform: translate(0,0) scale(1); }
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; }
+    }
+    .intro--done { display:none; } /* removed after animation */
+
+    /* ---- SIMPLE CONTENT ---- */
+    .hero h1{font-size:clamp(28px,3.6vw,46px); margin:6px 0 10px}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:#0b1220;color:var(--text);text-decoration:none}
+    .btn.primary{background:var(--accent); color:#081018; font-weight:700; border:0}
+    .grid{display:grid;gap:16px}
+    .cards{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    @media (max-width:900px){.hero{display:block}}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <strong>Hasan</strong>
+  <!-- INTRO OVERLAY -->
+  <div class="intro" id="intro">
+    <div class="intro__logo">Hasan</div>
+  </div>
+
+  <header>
+    <div class="wrap nav">
+      <div class="brand">Hasan</div>
       <nav>
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main>
-      <section id="hero">
-        <h1>Hi, I’m Hasan</h1>
-        <p class="muted">Biomedical Engineering student interested in medical devices, biomechanics, and research.</p>
-        <p><a class="btn" href="#projects">See my work</a></p>
-      </section>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Hi, I’m Hasan</h1>
+      <p class="muted">Biomedical Engineering student interested in medical devices, biomechanics, and research.</p>
+      <p><a class="btn primary" href="#projects">See my work</a></p>
+    </section>
 
-      <section id="about">
-        <h2>About</h2>
-        <p>rd year Biomedical Engineering student at German Jordanian University. I’m building strong skills in electronics, biomechanics, and research. Recently, I collaborated on a cartilage regeneration project using mesenchymal stem cells.</p>
-      </section>
+    <section id="about">
+      <h2>About</h2>
+      <p>I’m a 3rd year Biomedical Engineering student at GJU. Recently collaborated on cartilage regeneration using mesenchymal stem cells (MSC).</p>
+    </section>
 
-      <section id="projects">
-        <h2>Projects</h2>
-        <div class="card">
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid cards">
+        <article class="card">
           <h3>Cartilage Regeneration (MSC)</h3>
-          <p>Research on regenerative therapies for cartilage repair, focusing on stem cells and biomechanics.</p>
-        </div>
-        <div class="card">
+          <p>Explored MSC mechanisms for cartilage repair and integration with osteochondral tissue.</p>
+        </article>
+        <article class="card">
           <h3>Volunteer — Fennec</h3>
-          <p>40-hour program (03/2023–05/2023). Reception & technical assistant, teamwork and communication.</p>
-        </div>
-      </section>
+          <p>40-hour program (03/2023–05/2023). Reception & technical assistant; teamwork & communication.</p>
+        </article>
+      </div>
+    </section>
 
-      <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:zeinddin.kamel@gmail.com">zeinddin.kamel@gmail.com</a></p>
-        <p>LinkedIn: <a href="#" target="_blank">Your LinkedIn</a></p>
-      </section>
-    </main>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:you@example.com">you@example.com</a> · LinkedIn: <a href="#" target="_blank">Your LinkedIn</a></p>
+    </section>
+  </main>
 
-    <footer>
-      © <span id="year"></span> Hasan
-    </footer>
-  </div>
+  <footer class="wrap" style="color:var(--muted);padding:34px 0;border-top:1px solid var(--border);">
+    © <span id="year"></span> Hasan
+  </footer>
+
+  <script>
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // remove intro after animation completes (keeps page interactive)
+    const intro = document.getElementById('intro');
+    intro.addEventListener('animationend', (e) => {
+      if (e.animationName === 'fadeOut') {
+        intro.classList.add('intro--done'); // hides the overlay
+      }
+    });
+  </script>
+</body>
+</html>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>

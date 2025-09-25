@@ -4,81 +4,142 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hasan — Portfolio</title>
+  <meta name="description" content="Biomedical engineering student portfolio: projects, research, volunteering, and hackathons.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#0b1020; --panel:#0f172a; --text:#e2e8f0; --muted:#94a3b8; --border:#1f2937;
-      --accent:#3b82f6; /* blue for the logo */
+      /* Bright theme */
+      --bg1:#0a0f1f; --bg2:#0a1230; --bg3:#111a3a;
+      --text:#ecf3ff; --muted:#a7b3d1; --border:#223055;
+      --accent:#22d3ee;         /* cyan */
+      --accent2:#f472b6;        /* pink */
+      --accent3:#a78bfa;        /* violet */
+      --card:#0f1630; --panel:#0c1328;
+      --radius:16px; --shadow:0 16px 60px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0; color:var(--text); font-family:'Inter',system-ui,Segoe UI,Arial,sans-serif; line-height:1.65;
-      background: radial-gradient(1000px 600px at 10% -10%, rgba(56,189,248,.12), transparent 40%),
-                  radial-gradient(900px 600px at 110% 0%, rgba(96,165,250,.10), transparent 35%),
-                  var(--bg);
+      background:
+        radial-gradient(1000px 600px at 15% -15%, rgba(34,211,238,.20), transparent 45%),
+        radial-gradient(900px 600px at 110% 10%, rgba(167,139,250,.18), transparent 40%),
+        linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+      background-size: 200% 200%;
+      animation: bgShift 18s ease-in-out infinite alternate;
+    }
+    @keyframes bgShift{from{background-position:0% 0%} to{background-position:100% 100%}}
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto} body{animation:none}
+      .intro__text, .cv-modal__panel{animation:none}
     }
 
-    /* ---- NAV / LAYOUT ---- */
+    /* Layout */
     .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
     header{
       position:sticky; top:0; z-index:20;
-      backdrop-filter:saturate(1.1) blur(10px);
-      background:linear-gradient(to bottom, rgba(10,14,28,.7), rgba(10,14,28,.25) 60%, transparent);
+      backdrop-filter:saturate(1.1) blur(12px);
+      background:linear-gradient(to bottom, rgba(12,18,40,.78), rgba(12,18,40,.35) 55%, transparent);
       border-bottom:1px solid var(--border);
     }
     .nav{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0;}
-    .brand{font-weight:800; letter-spacing:.3px; color:var(--accent);} /* blue brand */
+    .brand{font-weight:800; letter-spacing:.4px; background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
+      -webkit-background-clip:text; background-clip:text; color:transparent;}
     .nav a{color:var(--text); text-decoration:none; margin-left:14px; position:relative}
-    .nav a::after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--accent); transition:width .25s ease;}
+    .nav a::after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--accent); transition:width .25s ease}
     .nav a:hover::after{width:100%}
-
-    section{padding:36px 0; border-top:1px solid var(--border)}
+    section{padding:40px 0; border-top:1px solid var(--border)}
     h2{font-size:26px; margin:0 0 10px}
     .muted{color:var(--muted)}
-    .card{background:#111827;border:1px solid var(--border);border-radius:16px;padding:16px}
 
-    /* ---- INTRO ANIMATION ---- */
-    .intro {
-      position: fixed; inset: 0; z-index: 9999; pointer-events: none;
-      display: grid; place-items: center; background: transparent; /* see page behind */
-    }
-    .intro__logo {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%) scale(3); /* start big & centered */
-      color: var(--accent); font-weight: 800; letter-spacing: .5px;
-      font-size: clamp(42px, 10vw, 120px);
-      will-change: transform, top, left, opacity;
-      animation: flyToCorner 1.6s cubic-bezier(.2,.8,.25,1) forwards,
-                 fadeOut 1.2s ease 1.2s forwards;
-      text-shadow: 0 10px 40px rgba(59,130,246,.35);
-    }
-    @keyframes flyToCorner {
-      0%   { top:50%; left:50%; transform:translate(-50%,-50%) scale(3); }
-      70%  { top: 18px; left: 22px; transform: translate(0,0) scale(1.06); }
-      100% { top: 18px; left: 22px; transform: translate(0,0) scale(1); }
-    }
-    @keyframes fadeOut {
-      to { opacity: 0; }
-    }
-    .intro--done { display:none; } /* removed after animation */
+    /* Hero */
+    .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:34px; align-items:center; padding:56px 0 24px;}
+    .hero h1{font-size:clamp(28px,3.6vw,46px); margin:6px 0 10px; cursor:pointer}
+    .lead{color:var(--muted); max-width:60ch}
+    .btn{display:inline-block; padding:12px 16px; border-radius:12px; text-decoration:none; border:1px solid var(--border);
+      background:#0b1220; color:var(--text); transition: transform .18s ease, box-shadow .18s ease}
+    .btn:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#061018; font-weight:700; border:0}
+    .blob{aspect-ratio:1/1; width:min(360px,90%); border-radius:50%;
+      background:
+        radial-gradient(40% 40% at 50% 50%, rgba(34,211,238,.35), transparent 60%),
+        radial-gradient(60% 60% at 70% 40%, rgba(244,114,182,.25), transparent 70%);
+      filter: blur(18px); margin: 0 auto; animation: float 6s ease-in-out infinite alternate;}
+    @keyframes float{from{transform:translateY(0)} to{transform:translateY(-10px)}}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
 
-    /* ---- SIMPLE CONTENT ---- */
-    .hero h1{font-size:clamp(28px,3.6vw,46px); margin:6px 0 10px}
-    .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:#0b1220;color:var(--text);text-decoration:none}
-    .btn.primary{background:var(--accent); color:#081018; font-weight:700; border:0}
-    .grid{display:grid;gap:16px}
+    /* Cards */
+    .grid{display:grid; gap:16px}
     .cards{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-    @media (max-width:900px){.hero{display:block}}
+    .card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:16px;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;}
+    .card:hover{transform:translateY(-4px); box-shadow:var(--shadow); border-color:#314278}
+    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+    .tag{font-size:12px; padding:6px 10px; border-radius:999px; background:#0b1220; border:1px solid var(--border); color:var(--muted)}
+
+    /* ---------- Intro welcome overlay ---------- */
+    .intro{
+      position:fixed; inset:0; z-index:9999; display:grid; place-items:center;
+      background: radial-gradient(1200px 700px at 50% -10%, rgba(34,211,238,.18), transparent 50%);
+      pointer-events:none;
+    }
+    .intro__text{
+      font-weight:800; text-align:center;
+      font-size:clamp(38px, 8vw, 120px);
+      line-height:1.05;
+      background: conic-gradient(from 120deg, var(--accent), var(--accent2), var(--accent3), var(--accent));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow: 0 12px 40px rgba(167,139,250,.35);
+      transform-origin:center;
+      animation: welcomeIn .9s cubic-bezier(.2,.8,.25,1), welcomeOut 1s ease 1.2s forwards;
+    }
+    @keyframes welcomeIn { from{opacity:0; transform:scale(0.6)} to{opacity:1; transform:scale(1)} }
+    /* slide/scale up as if returning to the header area */
+    @keyframes welcomeOut { to{opacity:0; transform: translateY(-120px) scale(.55)} }
+    .intro--done{display:none}
+
+    /* ---------- CV spotlight modal ---------- */
+    .cv-modal{
+      position:fixed; inset:0; background:rgba(5,8,18,.65); backdrop-filter: blur(6px);
+      display:none; place-items:center; z-index:9998;
+    }
+    .cv-modal.show{display:grid}
+    .cv-modal__panel{
+      background:linear-gradient(135deg, #0b1126, #121a3c);
+      border:1px solid var(--border); border-radius:22px; padding:22px; max-width:720px; width:min(92vw, 720px);
+      box-shadow:var(--shadow); text-align:center; animation: pop .3s ease;
+    }
+    @keyframes pop{from{opacity:0; transform:translateY(10px) scale(.98)} to{opacity:1; transform:none}}
+    .cv-modal h2{margin:0 0 8px; font-size:clamp(22px, 3vw, 32px);}
+    .cv-modal p{color:var(--muted); margin-top:0}
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:14px}
+    .link{display:inline-block; padding:12px 16px; border-radius:12px; text-decoration:none; border:1px solid var(--border); color:var(--text)}
+    .link.primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#081018; font-weight:700; border:0}
+
+    footer{color:var(--muted); padding:34px 0; border-top:1px solid var(--border); margin-top:20px}
   </style>
 </head>
 <body>
-  <!-- INTRO OVERLAY -->
+  <!-- Intro welcome -->
   <div class="intro" id="intro">
-    <div class="intro__logo">Hasan</div>
+    <div class="intro__text">Welcome to Hasan’s Portfolio</div>
+  </div>
+
+  <!-- CV Spotlight -->
+  <div class="cv-modal" id="cvModal" aria-hidden="true">
+    <div class="cv-modal__panel" role="dialog" aria-modal="true" aria-labelledby="cvTitle">
+      <h2 id="cvTitle">Want the full picture?</h2>
+      <p>Here’s my updated CV with projects, research, and experiences.</p>
+      <div class="cta-row">
+        <!-- UPDATE THE href IF YOU USE A DIFFERENT NAME/PATH -->
+        <a class="link primary" href="./CV_Hasan_Zeineddin.pdf" target="_blank" rel="noopener">Open CV (PDF)</a>
+        <a class="link" href="#projects" id="goProjects">Go to Projects</a>
+        <a class="link" href="#" id="closeCv">Close</a>
+      </div>
+    </div>
   </div>
 
   <header>
@@ -93,56 +154,107 @@
   </header>
 
   <main class="wrap">
+    <!-- HERO -->
     <section class="hero">
-      <h1>Hi, I’m Hasan</h1>
-      <p class="muted">Biomedical Engineering student interested in medical devices, biomechanics, and research.</p>
-      <p><a class="btn primary" href="#projects">See my work</a></p>
+      <div>
+        <h1 id="heroTitle">Hi, I’m Hasan</h1>
+        <p class="lead">I’m a biomedical engineering student passionate about bridging engineering with medicine to create meaningful healthcare solutions. I learn by doing—research, volunteering, hackathons, and events—building both technical and soft skills.</p>
+        <p><a class="btn primary" id="seeWork" href="#projects">See my work</a></p>
+      </div>
+      <div><div class="blob" aria-hidden="true"></div></div>
     </section>
 
+    <!-- ABOUT -->
     <section id="about">
       <h2>About</h2>
-      <p>I’m a 3rd year Biomedical Engineering student at GJU. Recently collaborated on cartilage regeneration using mesenchymal stem cells (MSC).</p>
+      <p>I enjoy taking on challenges and collaborative projects that push me to grow. My long-term goal is to contribute to innovations in medical technology and patient care—combining technical expertise with creativity and teamwork.</p>
+      <div class="tags" style="margin-top:8px">
+        <span class="tag">Python</span><span class="tag">MATLAB</span><span class="tag">SolidWorks</span>
+        <span class="tag">Signal Processing</span><span class="tag">Research</span>
+      </div>
     </section>
 
+    <!-- PROJECTS -->
     <section id="projects">
       <h2>Projects</h2>
       <div class="grid cards">
         <article class="card">
           <h3>Cartilage Regeneration (MSC)</h3>
-          <p>Explored MSC mechanisms for cartilage repair and integration with osteochondral tissue.</p>
+          <p>Explored MSC mechanisms for cartilage repair and challenges in osteochondral integration. Drafting manuscript.</p>
+          <div class="tags"><span class="tag">Research</span><span class="tag">Biomechanics</span><span class="tag">Regenerative Med</span></div>
         </article>
         <article class="card">
           <h3>Volunteer — Fennec</h3>
-          <p>40-hour program (03/2023–05/2023). Reception & technical assistant; teamwork & communication.</p>
+          <p>40-hour program (03/2023–05/2023). Reception & technical assistant for events/workshops; teamwork & communication.</p>
+          <div class="tags"><span class="tag">Operations</span><span class="tag">Community</span></div>
+        </article>
+        <article class="card">
+          <h3>Usher — Registration Dept., GJU</h3>
+          <p>Guided students through acceptance/enrollment and verified data accuracy for a smooth onboarding.</p>
+          <div class="tags"><span class="tag">Student Affairs</span></div>
         </article>
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact">
       <h2>Contact</h2>
-      <p>Email: <a href="mailto:you@example.com">you@example.com</a> · LinkedIn: <a href="#" target="_blank">Your LinkedIn</a></p>
+      <p>Email: <a href="mailto:you@example.com">you@example.com</a> · LinkedIn: <a href="#" target="_blank" rel="noopener">Your LinkedIn</a></p>
     </section>
   </main>
 
-  <footer class="wrap" style="color:var(--muted);padding:34px 0;border-top:1px solid var(--border);">
-    © <span id="year"></span> Hasan
+  <footer>
+    <div class="wrap">© <span id="year"></span> Hasan</div>
   </footer>
 
   <script>
     // year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // remove intro after animation completes (keeps page interactive)
+    // Intro: hide overlay after animation completes
     const intro = document.getElementById('intro');
     intro.addEventListener('animationend', (e) => {
-      if (e.animationName === 'fadeOut') {
-        intro.classList.add('intro--done'); // hides the overlay
+      if (e.animationName === 'welcomeOut') intro.classList.add('intro--done');
+    });
+
+    // CV spotlight: show when clicking hero title or "See my work"
+    const cvModal = document.getElementById('cvModal');
+    const heroTitle = document.getElementById('heroTitle');
+    const seeWork = document.getElementById('seeWork');
+    const goProjects = document.getElementById('goProjects');
+    const closeCv = document.getElementById('closeCv');
+
+    function openCvModal(evt){
+      // show modal on top
+      cvModal.classList.add('show');
+      cvModal.setAttribute('aria-hidden', 'false');
+
+      // if the trigger was the button, also smooth-scroll after a short delay
+      if (evt && evt.target === seeWork){
+        setTimeout(() => document.querySelector('#projects').scrollIntoView({behavior:'smooth'}), 550);
       }
+      // prevent the default anchor jump so we can animate first
+      if (evt) evt.preventDefault();
+    }
+    function closeCvModal(evt){
+      cvModal.classList.remove('show');
+      cvModal.setAttribute('aria-hidden', 'true');
+      if (evt) evt.preventDefault();
+    }
+
+    heroTitle.addEventListener('click', openCvModal);
+    seeWork.addEventListener('click', openCvModal);
+    goProjects.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector('#projects').scrollIntoView({behavior:'smooth'});
+      closeCvModal();
+    });
+    closeCv.addEventListener('click', closeCvModal);
+
+    // Close modal when clicking outside panel
+    cvModal.addEventListener('click', (e) => {
+      if (e.target === cvModal) closeCvModal();
     });
   </script>
-</body>
-</html>
-
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

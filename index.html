@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hasan — Portfolio</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; background:#0b1020; color:#e2e8f0; line-height:1.6; }
+    .wrap { max-width:900px; margin:0 auto; padding:24px; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:16px 0; border-bottom:1px solid #1f2937; }
+    nav a { color:#e2e8f0; text-decoration:none; margin-left:14px; }
+    h1 { margin:12px 0 8px; }
+    .muted { color:#94a3b8; }
+    section { padding:24px 0; border-bottom:1px solid #1f2937; }
+    .card { background:#111827; border:1px solid #1f2937; border-radius:12px; padding:14px; margin:10px 0; }
+    footer { padding:24px 0; color:#94a3b8; }
+    .btn { display:inline-block; padding:10px 14px; border-radius:8px; border:1px solid #1f2937; color:#0b1020; background:#38bdf8; text-decoration:none; font-weight:600; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <strong>Hasan</strong>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="hero">
+        <h1>Hi, I’m Hasan</h1>
+        <p class="muted">Biomedical Engineering student interested in medical devices, biomechanics, and research.</p>
+        <p><a class="btn" href="#projects">See my work</a></p>
+      </section>
+
+      <section id="about">
+        <h2>About</h2>
+        <p>I’m a 3rd year Biomedical Engineering student at German Jordanian University. I’m building strong skills in electronics, biomechanics, and research. Recently, I collaborated on a cartilage regeneration project using mesenchymal stem cells.</p>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="card">
+          <h3>Cartilage Regeneration (MSC)</h3>
+          <p>Research on regenerative therapies for cartilage repair, focusing on stem cells and biomechanics.</p>
+        </div>
+        <div class="card">
+          <h3>Volunteer — Fennec</h3>
+          <p>40-hour program (03/2023–05/2023). Reception & technical assistant, teamwork and communication.</p>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
+        <p>LinkedIn: <a href="#" target="_blank">Your LinkedIn</a></p>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Hasan
+    </footer>
+  </div>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

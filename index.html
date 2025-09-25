@@ -6,6 +6,18 @@
 <title>Hasan Zeineddin – Portfolio</title>
 <meta name="description" content="Biomedical engineering portfolio: projects, research, experience, and contact." />
 <style>
+  /* Click pop animation for nav links & buttons */
+.grow-on-click {
+  transition: transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s;
+  transform-origin: center;
+}
+.grow-on-click.is-clicked {
+  transform: scale(1.08);
+  box-shadow: var(--glow);
+}
+/* Nice press feedback on mouse down too */
+.grow-on-click:active { transform: scale(0.96); }
+
   :root{
     --primary:#2563EB; /* Electric Blue */
     --lime:#A3E635;
@@ -130,6 +142,22 @@
   @media (max-width:760px){ .hero{padding-top:100px} .hero h1{font-size:32px} }
 </style>
 </head>
+  // Make header nav links and buttons pop on click / keyboard
+const tappables = document.querySelectorAll('.nav a, .btn');
+tappables.forEach(el => {
+  el.classList.add('grow-on-click');
+
+  const pop = () => {
+    el.classList.add('is-clicked');
+    setTimeout(() => el.classList.remove('is-clicked'), 180);
+  };
+
+  el.addEventListener('click', pop);
+  el.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') pop();
+  });
+});
+
 <body>
 
 <header class="header">

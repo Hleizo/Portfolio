@@ -6,18 +6,6 @@
 <title>Hasan Zeineddin – Portfolio</title>
 <meta name="description" content="Biomedical engineering portfolio: projects, research, experience, and contact." />
 <style>
-  /* Click pop animation for nav links & buttons */
-.grow-on-click {
-  transition: transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s;
-  transform-origin: center;
-}
-.grow-on-click.is-clicked {
-  transform: scale(1.08);
-  box-shadow: var(--glow);
-}
-/* Nice press feedback on mouse down too */
-.grow-on-click:active { transform: scale(0.96); }
-
   :root{
     --primary:#2563EB; /* Electric Blue */
     --lime:#A3E635;
@@ -45,7 +33,7 @@
   }
   a{color:inherit;text-decoration:none}
   .container{max-width:1100px;margin:0 auto;padding:0 20px}
-  .section{padding:80px 0}
+  .section{padding:88px 0}
   .card{
     background:var(--panel);
     border:1px solid var(--border);
@@ -58,7 +46,7 @@
     padding:12px 18px;
     border-radius:999px;
     border:1px solid transparent;
-    transition:.2s ease;
+    transition:.22s cubic-bezier(.2,.8,.2,1);
     font-weight:600;
     letter-spacing:.2px;
   }
@@ -78,19 +66,40 @@
     background: linear-gradient(#0b1220ee,#0b1220d0);
     border-bottom:1px solid var(--border);
   }
+  .brand{font-weight:900;letter-spacing:.5px}
+  .brand .accent{color:var(--lime)}
   .nav{display:flex;gap:22px;align-items:center}
-  .nav a{font-size:14px;color:#cfd6e6}
+  .nav a{font-size:14px;color:#cfd6e6;position:relative;padding-bottom:6px}
   .nav a:hover{color:var(--lime)}
+  .nav a.active::after{
+    content:""; position:absolute; left:50%; transform:translateX(-50%);
+    bottom:0; width:28px; height:2px; background:var(--lime); border-radius:2px;
+  }
+
+  /* Click grow animation */
+  .grow-on-click { transform-origin:center; transition: transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s; }
+  .grow-on-click.is-clicked { transform: scale(1.08); box-shadow: var(--glow); }
+  .grow-on-click:active { transform: scale(0.96); }
 
   /* Hero */
-  .hero{padding:120px 0 80px; position:relative; overflow:hidden}
-  .hero h1{font-size:42px;line-height:1.15;margin:0 0 10px}
+  .hero{padding:130px 0 90px; position:relative; overflow:hidden}
+  .hero h1{font-size:44px;line-height:1.15;margin:0 0 10px}
   .accent{color:var(--lime)}
-  .hero p{max-width:640px;color:#cfd6e6;margin:10px 0 20px}
+  .hero p{max-width:680px;color:#cfd6e6;margin:10px 0 20px}
   .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
   .preview-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
   .preview{aspect-ratio:16/9; background:#0d1325; border:1px solid var(--border); border-radius:12px}
+
+  /* Name intro animation */
+  .name-pop { display:inline-block; }
+  .name-pop span { display:inline-block; transform:translateY(12px) scale(.92); opacity:0; }
+  .name-pop span.show { animation: letterPop .7s cubic-bezier(.2,.8,.2,1) forwards; }
+  @keyframes letterPop {
+    0% { transform:translateY(12px) scale(.92); opacity:0; }
+    40% { transform:translateY(-6px) scale(1.08); opacity:1; }
+    100% { transform:translateY(0) scale(1); opacity:1; }
+  }
 
   /* Sections titles */
   h2{font-size:30px;margin:0 0 14px}
@@ -100,7 +109,7 @@
   .facts{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:18px}
   .fact{padding:14px}
 
-  /* Highlights cards */
+  /* Highlights/Projects cards */
   .grid{display:grid;gap:14px}
   .grid-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
   .proj-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
@@ -121,7 +130,9 @@
   /* Skills/Courses chips */
   .chip{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:8px 12px;margin:6px 6px 0 0}
 
-  /* Contact form */
+  /* Contact panel */
+  .contact-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+  .contact-cta{padding:18px}
   form label{display:block;font-size:14px;margin:8px 0 6px;color:#e3e8f4}
   input, textarea{
     width:100%; background:#0b1320; color:var(--text); border:1px solid var(--border);
@@ -132,23 +143,22 @@
   /* Footer */
   .footer{border-top:1px solid var(--border); padding:26px 0; color:#aab3c7; font-size:14px}
 
-  /* Animations */
-  .pop{animation:pop .7s cubic-bezier(.2,.8,.2,1) both}
-  @keyframes pop{from{opacity:0; transform:translateY(8px) scale(.98)} to{opacity:1; transform:translateY(0) scale(1)}}
-  .pulse{animation:pulse 2.5s infinite}
-  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(163,230,53,.25)} 50%{box-shadow:0 0 0 12px rgba(163,230,53,0)}}
-  .tilt:hover{transform:perspective(800px) rotateX(2deg) rotateY(-2deg)}
-  .tilt{transition:transform .25s ease}
-  @media (max-width:760px){ .hero{padding-top:100px} .hero h1{font-size:32px} }
+  /* Scroll-in animation for sections */
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease}
+  .reveal.show{opacity:1; transform:translateY(0)}
+
+  @media (max-width:760px){
+    .hero{padding-top:110px}
+    .hero h1{font-size:34px}
+    .contact-grid{grid-template-columns:1fr}
+  }
 </style>
 </head>
-<script>
-</script>
 <body>
 
 <header class="header">
   <div class="container" style="display:flex;align-items:center;justify-content:space-between;padding:12px 0">
-    <a href="#top" style="font-weight:800;letter-spacing:.5px">HASAN <span class="accent">ZEINEDDIN</span></a>
+    <a href="#top" class="brand"><span class="name-pop" id="brandName">HASAN <span class="accent">ZEINEDDIN</span></span></a>
     <nav class="nav" aria-label="primary">
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
@@ -165,14 +175,20 @@
 <main id="top">
 
   <!-- HERO -->
-  <section class="hero container">
-    <div class="pop">
-      <h1>Hi, I’m Hasan.<br/>I build <span class="accent">useful health tech</span>.</h1>
-      <p>Biomedical engineering student who learns by doing—research, code, hackathons, and real-world projects.</p>
+  <section class="hero container reveal">
+    <div>
+      <h1>
+        <span class="name-pop" id="introName">Hi, I’m Hasan.</span><br/>
+        I build <span class="accent">useful health tech</span>.
+      </h1>
+      <p>
+        Biomedical engineering student with a maker mindset. I learn by doing—research, code, and real-world projects—
+        and I like turning complex ideas into simple tools that help people.
+      </p>
       <div class="cta-row">
-        <a class="btn btn-primary pulse" href="cv.pdf" target="_blank" rel="noopener">View CV</a>
-        <a class="btn btn-outline" href="#projects">See My Work</a>
-        <a class="btn btn-ghost" href="#contact">Contact Me</a>
+        <a class="btn btn-primary grow-on-click" href="cv.pdf" target="_blank" rel="noopener">View CV</a>
+        <a class="btn btn-outline grow-on-click" href="#projects">See My Work</a>
+        <a class="btn btn-ghost grow-on-click" href="#contact">Contact Me</a>
       </div>
       <div class="chips">
         <span class="badge">Research: MSCs cartilage</span>
@@ -181,7 +197,7 @@
       </div>
     </div>
 
-    <div class="card tilt" style="margin-top:30px;padding:16px">
+    <div class="card" style="margin-top:30px;padding:16px">
       <div class="preview-grid">
         <div class="preview"></div><div class="preview"></div><div class="preview"></div><div class="preview"></div>
       </div>
@@ -190,29 +206,30 @@
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="section">
+  <section id="about" class="section reveal">
     <div class="container">
-      <h2 class="pop">About</h2>
-      <p class="muted pop" style="max-width:840px">
-        I’m a biomedical engineering student passionate about bridging engineering with medicine. Through research,
-        hackathons, volunteering, and campus roles, I’ve built a hands-on foundation in design, code, and collaboration.
-        I love challenges and team work, and I care about turning ideas into things that help people.
+      <h2>About</h2>
+      <p class="muted" style="max-width:840px">
+        I’m a biomedical engineering student focused on practical impact. I’ve supported large student events,
+        volunteered at tech initiatives, joined hackathons as a backend developer, and observed medical devices
+        in a hospital environment. I’m building a strong base in engineering, research, and communication so I can
+        contribute to the next wave of healthcare technology.
       </p>
       <div class="facts">
         <div class="card fact"><div class="muted" style="font-size:13px">Based in</div><div>Saudi Arabia / Jordan</div></div>
         <div class="card fact"><div class="muted" style="font-size:13px">Interests</div><div>Medical devices, signal processing, AI in healthcare</div></div>
         <div class="card fact"><div class="muted" style="font-size:13px">Languages</div><div>Arabic, English (German A2)</div></div>
-        <div class="card fact"><div class="muted" style="font-size:13px">Currently</div><div>Preparing manuscript (MSCs & cartilage)</div></div>
+        <div class="card fact"><div class="muted" style="font-size:13px">Now</div><div>Drafting manuscript on cartilage regeneration</div></div>
       </div>
     </div>
   </section>
 
   <!-- PROJECTS -->
-  <section id="projects" class="section">
+  <section id="projects" class="section reveal">
     <div class="container">
-      <h2 class="pop">Projects</h2>
+      <h2>Projects</h2>
       <div class="grid proj-grid">
-        <div class="card proj-card" data-proj="1">
+        <div class="card proj-card grow-on-click" data-proj="1">
           <div class="preview"></div>
           <h3 style="margin:10px 0 4px">Cartilage Regeneration (MSCs)</h3>
           <div class="muted" style="font-size:14px">Research visuals & literature mapping</div>
@@ -220,7 +237,7 @@
             <span class="chip">Research</span><span class="chip">Biomed</span><span class="chip">Writing</span>
           </div>
         </div>
-        <div class="card proj-card" data-proj="2">
+        <div class="card proj-card grow-on-click" data-proj="2">
           <div class="preview"></div>
           <h3 style="margin:10px 0 4px">AI Innovators Hackathon – Backend</h3>
           <div class="muted" style="font-size:14px">API for team submissions & scoring</div>
@@ -228,7 +245,7 @@
             <span class="chip">Node.js</span><span class="chip">Python</span><span class="chip">Teamwork</span>
           </div>
         </div>
-        <div class="card proj-card" data-proj="3">
+        <div class="card proj-card grow-on-click" data-proj="3">
           <div class="preview"></div>
           <h3 style="margin:10px 0 4px">Signal Processing Mini-Lab</h3>
           <div class="muted" style="font-size:14px">ECG filtering & feature extraction</div>
@@ -236,7 +253,7 @@
             <span class="chip">Python</span><span class="chip">DSP</span>
           </div>
         </div>
-        <div class="card proj-card" data-proj="4">
+        <div class="card proj-card grow-on-click" data-proj="4">
           <div class="preview"></div>
           <h3 style="margin:10px 0 4px">Canva Visual Explainers</h3>
           <div class="muted" style="font-size:14px">Patient-friendly device explainers</div>
@@ -253,80 +270,66 @@
     <div class="modal card">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
         <h3 id="m-title" style="margin:0;font-size:22px;font-weight:800">Project Title</h3>
-        <button id="m-close" class="btn btn-ghost">Close</button>
+        <button id="m-close" class="btn btn-ghost grow-on-click">Close</button>
       </div>
       <div class="preview" style="margin:14px 0 10px"></div>
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px">
-        <div class="card" style="padding:12px">
-          <div class="muted" style="font-size:12px">Problem</div>
-          <div id="m-problem">Create a clear, reliable solution under time constraints.</div>
-        </div>
-        <div class="card" style="padding:12px">
-          <div class="muted" style="font-size:12px">Approach</div>
-          <div id="m-approach">Designed the system, wrote clean code, and documented usage.</div>
-        </div>
-        <div class="card" style="padding:12px">
-          <div class="muted" style="font-size:12px">Outcome</div>
-          <div id="m-outcome">Smooth demo; teammates and judges could use it easily.</div>
-        </div>
-        <div class="card" style="padding:12px">
-          <div class="muted" style="font-size:12px">What I learned</div>
-          <div id="m-learned">Planning > rushing. Small tests save time; clear docs help teams.</div>
-        </div>
+        <div class="card" style="padding:12px"><div class="muted" style="font-size:12px">Problem</div><div id="m-problem"></div></div>
+        <div class="card" style="padding:12px"><div class="muted" style="font-size:12px">Approach</div><div id="m-approach"></div></div>
+        <div class="card" style="padding:12px"><div class="muted" style="font-size:12px">Outcome</div><div id="m-outcome"></div></div>
+        <div class="card" style="padding:12px"><div class="muted" style="font-size:12px">What I learned</div><div id="m-learned"></div></div>
       </div>
     </div>
   </div>
 
   <!-- RESEARCH -->
-  <section id="research" class="section">
+  <section id="research" class="section reveal">
     <div class="container">
-      <h2 class="pop">Research</h2>
+      <h2>Research</h2>
       <div class="card" style="padding:18px">
-        <h3 style="margin:0">Cartilage Regeneration Using Mesenchymal Stem Cells</h3>
+        <h3 style="margin:0">Cartilage Regeneration with Mesenchymal Stem Cells</h3>
         <p class="muted" style="margin:10px 0 14px;max-width:900px">
-          Collaborative project with a medical student from Egypt exploring regenerative therapies for cartilage repair,
-          with emphasis on biomechanical integration with osteochondral tissue.
+          Collaborative work with a medical student (Egypt) studying how MSCs support cartilage repair and how new tissue integrates with
+          osteochondral structures. Produced a full report; manuscript in preparation.
         </p>
         <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px">
           <div class="preview"></div><div class="preview"></div><div class="preview"></div>
         </div>
-        <div class="muted" style="margin-top:10px;font-size:14px">Comprehensive report complete; manuscript in preparation.</div>
-        <a href="#contact" class="btn btn-outline" style="margin-top:12px">Request summary PDF</a>
       </div>
     </div>
   </section>
 
   <!-- EXPERIENCE -->
-  <section id="experience" class="section">
+  <section id="experience" class="section reveal">
     <div class="container">
-      <h2 class="pop">Experience</h2>
+      <h2>Experience</h2>
       <div class="timeline">
         <div class="t-item">
           <div class="card" style="padding:14px">
             <div style="font-weight:700">Usher – Registration Department</div>
             <div class="muted" style="font-size:14px">German Jordanian University, Madaba</div>
-            <div style="font-size:14px;margin-top:6px">Guided enrollment; ensured data accuracy; smooth onboarding.</div>
+            <div style="font-size:14px;margin-top:6px">Guided enrollment and ensured accurate records for new students.</div>
           </div>
         </div>
         <div class="t-item">
           <div class="card" style="padding:14px">
             <div style="font-weight:700">Usher – Career Fair (80+ companies)</div>
             <div class="muted" style="font-size:14px">German Jordanian University, Madaba</div>
-            <div style="font-size:14px;margin-top:6px">Coordinated with partner company; logistics & communication.</div>
+            <div style="font-size:14px;margin-top:6px">Coordinated with a partner company; supported logistics and communication on the day.</div>
           </div>
         </div>
         <div class="t-item">
           <div class="card" style="padding:14px">
             <div style="font-weight:700">Volunteer – Fennec (40h)</div>
             <div class="muted" style="font-size:14px">Jeddah, Saudi Arabia</div>
-            <div style="font-size:14px;margin-top:6px">Reception + technical assistant; events & workshops.</div>
+            <div style="font-size:14px;margin-top:6px">Reception and technical assistance; helped run events and workshops.</div>
           </div>
         </div>
         <div class="t-item">
           <div class="card" style="padding:14px">
             <div style="font-weight:700">Hospital Observership – King Faisal Specialist Hospital</div>
             <div class="muted" style="font-size:14px">Jeddah, Saudi Arabia</div>
-            <div style="font-size:14px;margin-top:6px">Explored medical devices with engineers in clinical context.</div>
+            <div style="font-size:14px;margin-top:6px">Observed biomedical devices in clinical use and learned from engineers on site.</div>
           </div>
         </div>
       </div>
@@ -334,9 +337,9 @@
   </section>
 
   <!-- SKILLS -->
-  <section id="skills" class="section">
+  <section id="skills" class="section reveal">
     <div class="container">
-      <h2 class="pop">Skills</h2>
+      <h2>Skills</h2>
       <div class="grid grid-3">
         <div class="card" style="padding:14px">
           <div class="muted" style="font-size:12px">Technical</div>
@@ -355,9 +358,9 @@
   </section>
 
   <!-- COURSES -->
-  <section id="courses" class="section">
+  <section id="courses" class="section reveal">
     <div class="container">
-      <h2 class="pop">Courses & Certifications</h2>
+      <h2>Courses & Certifications</h2>
       <div>
         <span class="chip">Research Writing – NRC (Jul 2024)</span>
         <span class="chip">Innovation & Strategic Thinking – Orange Digital Village (Aug 2024)</span>
@@ -369,21 +372,32 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="section">
+  <section id="contact" class="section reveal">
     <div class="container">
-      <h2 class="pop">Contact</h2>
-      <p class="muted" style="margin:0 0 14px">Want to build something together? Reach out—I’d love to help.</p>
-      <form name="contact" method="POST" data-netlify="true" class="card" style="padding:16px">
-        <input type="hidden" name="form-name" value="contact" />
-        <label>Name<input name="name" required /></label>
-        <label>Email<input type="email" name="email" required /></label>
-        <label>Message<textarea rows="5" name="message" required></textarea></label>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-          <button class="btn btn-primary" type="submit">Send</button>
-          <a class="btn btn-outline" href="mailto:zeinddin.kamel@gmail.com">Or email me directly</a>
-          <a class="btn btn-outline" href="https://www.linkedin.com/in/hasan-zeineddin-2015442b3" target="_blank" rel="noopener">LinkedIn</a>
+      <h2>Contact</h2>
+      <div class="contact-grid">
+        <!-- Left: direct actions -->
+        <div class="card contact-cta">
+          <h3 style="margin:0 0 6px">Let’s build something useful</h3>
+          <p class="muted" style="margin:0 0 14px">I usually reply within 24–48 hours. You can also reach me instantly via WhatsApp.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <a class="btn btn-primary grow-on-click" href="mailto:zeinddin.kamel@gmail.com">Email me</a>
+            <a class="btn btn-outline grow-on-click" href="tel:+962798043524">Call: +962 798043524</a>
+            <a class="btn btn-ghost grow-on-click" href="https://wa.me/962798043524" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
         </div>
-      </form>
+        <!-- Right: Netlify form -->
+        <form name="contact" method="POST" data-netlify="true" class="card" style="padding:18px">
+          <input type="hidden" name="form-name" value="contact" />
+          <label>Name<input name="name" required /></label>
+          <label>Email<input type="email" name="email" required /></label>
+          <label>Message<textarea rows="6" name="message" required></textarea></label>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <button class="btn btn-primary grow-on-click" type="submit">Send message</button>
+            <a class="btn btn-outline grow-on-click" href="cv.pdf" target="_blank" rel="noopener">Download CV</a>
+          </div>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -401,86 +415,123 @@
 </footer>
 
 <script>
-  // Year
+  // 1) Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Simple project modal data
-  const projData = {
-    1:{
-      title:'Cartilage Regeneration (MSCs)',
-      problem:'Understanding and communicating literature on cartilage repair and osteochondral integration.',
-      approach:'Mapped key studies, built clear visuals/explainers, and summarized mechanisms.',
-      outcome:'Crisp narrative & figures that support manuscript writing and presentations.',
-      learned:'How to turn complex research into understandable visuals and messages.'
-    },
-    2:{
-      title:'AI Innovators Hackathon – Backend',
-      problem:'Need fast, reliable API for submissions & scoring during finals.',
-      approach:'Designed endpoints, handled auth, wrote docs & quick tests.',
-      outcome:'Zero downtime; judges accessed results smoothly.',
-      learned:'Planning + small tests > rushing; docs keep teams aligned.'
-    },
-    3:{
-      title:'Signal Processing Mini-Lab',
-      problem:'Noisy ECG signals reduce feature quality.',
-      approach:'Applied filters, extracted features, validated on sample datasets.',
-      outcome:'Cleaner signals and more reliable features.',
-      learned:'DSP basics and the value of visualizing each step.'
-    },
-    4:{
-      title:'Canva Visual Explainers',
-      problem:'Patients struggle to understand device concepts.',
-      approach:'Built friendly visuals and micro-explainers.',
-      outcome:'Faster comprehension in demos.',
-      learned:'Good visuals = less confusion and better decisions.'
-    }
-  };
+  // 2) On-load name animation (hero & brand)
+  function animateName(id, delay=0){
+    const el = document.getElementById(id);
+    if(!el) return;
+    const text = el.textContent;
+    el.innerHTML = '';
+    [...text].forEach((ch, i)=>{
+      const span = document.createElement('span');
+      span.textContent = ch;
+      el.appendChild(span);
+      setTimeout(()=> span.classList.add('show'), delay + i*45);
+    });
+  }
+  window.addEventListener('load', ()=>{
+    animateName('introName', 120);
+    animateName('brandName', 0);
+  });
 
-  // Modal behavior
+  // 3) Reveal sections on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
+  }, {threshold: .12});
+  revealEls.forEach(el=> io.observe(el));
+
+  // 4) Smooth scroll with animated offset + active link highlight
+  const header = document.querySelector('.header');
+  const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+  function setActiveLink(hash){
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === hash));
+  }
+  navLinks.forEach(link=>{
+    link.classList.add('grow-on-click');
+    link.addEventListener('click', (ev)=>{
+      ev.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if(!target) return;
+      // grow pop
+      link.classList.add('is-clicked'); setTimeout(()=>link.classList.remove('is-clicked'), 180);
+      // animated scroll with offset (header height)
+      const headerH = header.getBoundingClientRect().height + 8;
+      const top = target.getBoundingClientRect().top + window.scrollY - headerH;
+      window.scrollTo({ top, behavior:'smooth' });
+      setActiveLink(link.getAttribute('href'));
+    });
+  });
+  // highlight current section while scrolling
+  const sections = [...document.querySelectorAll('section[id]')];
+  window.addEventListener('scroll', ()=>{
+    let current = '#about';
+    const offset = header.getBoundingClientRect().height + 20;
+    sections.forEach(sec=>{
+      if (window.scrollY >= sec.offsetTop - offset - 10) current = '#'+sec.id;
+    });
+    setActiveLink(current);
+  });
+
+  // 5) Click-pop for all buttons
+  const buttons = document.querySelectorAll('.btn');
+  buttons.forEach(el=>{
+    el.classList.add('grow-on-click');
+    const pop = ()=>{ el.classList.add('is-clicked'); setTimeout(()=>el.classList.remove('is-clicked'),180); };
+    el.addEventListener('click', pop);
+    el.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' ') pop(); });
+  });
+
+  // 6) Project modal content
+  const projData = {
+    1:{title:'Cartilage Regeneration (MSCs)',
+       problem:'Communicating literature on cartilage repair and integration.',
+       approach:'Mapped key studies, created clear visuals and concise summaries.',
+       outcome:'Crisp narrative & figures supporting manuscript preparation.',
+       learned:'How to translate complex research into useful visuals.'},
+    2:{title:'AI Innovators Hackathon – Backend',
+       problem:'Fast, reliable API for submissions & scoring.',
+       approach:'Designed endpoints, handled auth, wrote docs & quick tests.',
+       outcome:'Stable finals; judges accessed results smoothly.',
+       learned:'Plan first; small tests save time.'},
+    3:{title:'Signal Processing Mini-Lab',
+       problem:'Noisy ECG signals reduce feature quality.',
+       approach:'Applied filters, extracted features, validated on samples.',
+       outcome:'Cleaner signals and more reliable features.',
+       learned:'DSP basics + value of visual checks.'},
+    4:{title:'Canva Visual Explainers',
+       problem:'People struggled to grasp device ideas quickly.',
+       approach:'Built friendly visuals and micro-explainers.',
+       outcome:'Faster comprehension in demos.',
+       learned:'Good visuals reduce confusion.'}
+  };
   const modal = document.getElementById('modal');
-  const closeBtn = document.getElementById('m-close');
   const mTitle = document.getElementById('m-title');
-  const mProb = document.getElementById('m-problem');
+  const mProblem = document.getElementById('m-problem');
   const mApproach = document.getElementById('m-approach');
   const mOutcome = document.getElementById('m-outcome');
   const mLearned = document.getElementById('m-learned');
+  const closeBtn = document.getElementById('m-close');
 
   document.querySelectorAll('.proj-card').forEach(card=>{
     card.addEventListener('click', ()=>{
       const id = card.getAttribute('data-proj');
-      const d = projData[id];
-      if(!d) return;
+      const d = projData[id]; if(!d) return;
       mTitle.textContent = d.title;
-      mProb.textContent = d.problem;
+      mProblem.textContent = d.problem;
       mApproach.textContent = d.approach;
       mOutcome.textContent = d.outcome;
       mLearned.textContent = d.learned;
       modal.classList.add('open');
+      // pop effect on open
+      card.classList.add('is-clicked'); setTimeout(()=>card.classList.remove('is-clicked'),180);
     });
   });
-
   closeBtn.addEventListener('click', ()=> modal.classList.remove('open'));
   modal.addEventListener('click', (e)=>{ if(e.target===modal){ modal.classList.remove('open'); }});
-  // Click-pop animation for nav links + buttons
-  document.addEventListener('DOMContentLoaded', function () {
-    const tappables = document.querySelectorAll('.nav a, .btn');
-
-    tappables.forEach((el) => {
-      el.classList.add('grow-on-click'); // uses the CSS you added
-
-      const pop = () => {
-        el.classList.add('is-clicked');
-        setTimeout(() => el.classList.remove('is-clicked'), 180);
-      };
-
-      el.addEventListener('click', pop);
-      el.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') pop();
-      });
-    });
-  });
-</body>
-</html>
+</script>
 
 </body>
 </html>

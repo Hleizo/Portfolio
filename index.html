@@ -2,38 +2,42 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Hasan Zeineddin – Portfolio</title>
-<meta name="description" content="Biomedical engineering portfolio: projects, research, experience, and contact." />
+<meta name="description" content="Hasan Zeineddin — biomedical engineering portfolio: projects, research, experience and contact." />
+
 <style>
+  /* ========= THEME (AQUA / BRIGHT) ========= */
   :root{
-    --primary:#2563EB; /* Electric Blue */
-    --lime:#A3E635;
-    --coral:#FB7185;
-    --bg:#0B1220;      /* deep slate */
-    --panel:#0f172aee; /* card bg */
-    --border:#1f2a44;  /* card border */
-    --text:#E6EAF5;
-    --muted:#9AA3B2;
+    --primary:#06B6D4;     /* aqua cyan */
+    --secondary:#22D3EE;   /* lighter aqua */
+    --accent:#4ADE80;      /* soft green */
+    --bg:#071820;          /* deep teal background */
+    --panel:#0A2230F2;     /* card bg */
+    --border:#104657;      /* card border */
+    --text:#E9FBFF;        /* text on dark */
+    --muted:#C6F5FB;       /* lighter text */
     --radius:16px;
-    --shadow:0 20px 40px rgba(0,0,0,.35);
-    --glow:0 0 30px rgba(163,230,53,.35);
+    --shadow:0 18px 36px rgba(0,0,0,.35);
+    --glow:0 0 28px rgba(34,211,238,.45);
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0;
-    background: radial-gradient(1200px 600px at -10% -10%, rgba(37,99,235,.18), transparent 60%),
-               radial-gradient(1200px 600px at 110% 110%, rgba(163,230,53,.10), transparent 60%),
-               var(--bg);
     color:var(--text);
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     line-height:1.6;
     scroll-behavior:smooth;
+    background:
+      radial-gradient(800px 400px at 10% -10%, rgba(34,211,238,.28), transparent 60%),
+      radial-gradient(800px 400px at 90% 110%, rgba(74,222,128,.18), transparent 60%),
+      var(--bg);
+    overflow-x:hidden;
   }
   a{color:inherit;text-decoration:none}
   .container{max-width:1100px;margin:0 auto;padding:0 20px}
-  .section{padding:88px 0}
+  .section{padding:92px 0}
   .card{
     background:var(--panel);
     border:1px solid var(--border);
@@ -42,133 +46,161 @@
     backdrop-filter: blur(8px);
   }
   .btn{
-    display:inline-block;
-    padding:12px 18px;
-    border-radius:999px;
-    border:1px solid transparent;
-    transition:.22s cubic-bezier(.2,.8,.2,1);
-    font-weight:600;
-    letter-spacing:.2px;
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:12px 18px;border-radius:999px;border:1px solid transparent;
+    transition:.22s cubic-bezier(.2,.8,.2,1);font-weight:600;letter-spacing:.2px
   }
-  .btn-primary{background:var(--primary)}
-  .btn-primary:hover{filter:brightness(.95); box-shadow:var(--glow)}
-  .btn-outline{border-color:color-mix(in srgb, var(--lime) 55%, #ffffff00); background:transparent}
-  .btn-outline:hover{background:color-mix(in srgb, var(--lime) 12%, transparent); border-color:var(--lime)}
-  .btn-ghost{border-color:color-mix(in srgb, var(--coral) 35%, #ffffff00)}
-  .btn-ghost:hover{background:color-mix(in srgb, var(--coral) 12%, transparent); border-color:var(--coral)}
-  .badge{
-    display:inline-block;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted)
-  }
+  .btn-primary{background:var(--primary);color:#001318}
+  .btn-primary:hover{filter:brightness(.98); box-shadow:var(--glow)}
+  .btn-outline{border-color:color-mix(in srgb, var(--secondary) 60%, #ffffff00); background:transparent}
+  .btn-outline:hover{background:color-mix(in srgb, var(--secondary) 16%, transparent); border-color:var(--secondary)}
+  .btn-ghost{border-color:color-mix(in srgb, var(--accent) 45%, #ffffff00)}
+  .btn-ghost:hover{background:color-mix(in srgb, var(--accent) 14%, transparent); border-color:var(--accent)}
+  .badge{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted)}
 
-  /* Header */
+  /* Header / Nav */
   .header{
-    position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
-    background: linear-gradient(#0b1220ee,#0b1220d0);
+    position:sticky; top:0; z-index:50; backdrop-filter:blur(10px);
+    background: linear-gradient(#061720F0,#061720D0);
     border-bottom:1px solid var(--border);
   }
-  .brand{font-weight:900;letter-spacing:.5px}
-  .brand .accent{color:var(--lime)}
+  .brand{font-weight:900;letter-spacing:.5px; white-space:nowrap}
+  .brand .accent{color:var(--secondary)}
   .nav{display:flex;gap:22px;align-items:center}
-  .nav a{font-size:14px;color:#cfd6e6;position:relative;padding-bottom:6px}
-  .nav a:hover{color:var(--lime)}
+  .nav a{font-size:14px;color:#E4FBFF;position:relative;padding:8px 0}
+  .nav a:hover{color:var(--secondary)}
   .nav a.active::after{
     content:""; position:absolute; left:50%; transform:translateX(-50%);
-    bottom:0; width:28px; height:2px; background:var(--lime); border-radius:2px;
+    bottom:-2px; width:28px; height:2px; background:var(--secondary); border-radius:2px;
+  }
+  /* Mobile menu */
+  .menu-btn{display:none; border:1px solid var(--border); background:transparent; color:var(--text);
+    border-radius:10px; padding:10px 12px; line-height:0}
+  .menu-icon{width:22px;height:2px;background:var(--text);position:relative;display:block}
+  .menu-icon::before,.menu-icon::after{content:"";position:absolute;left:0;width:22px;height:2px;background:var(--text)}
+  .menu-icon::before{top:-7px}.menu-icon::after{top:7px}
+  .nav-wrap{display:flex;align-items:center;gap:16px}
+  /* collapsed state */
+  @media (max-width: 860px){
+    .menu-btn{display:inline-flex}
+    .nav{position:fixed; top:58px; left:0; right:0; background:#061720F2; border-bottom:1px solid var(--border);
+         display:none; flex-direction:column; padding:12px 16px}
+    .nav.open{display:flex}
+    .nav a{width:100%; padding:12px 8px; font-size:16px}
   }
 
-  /* Click grow animation */
-  .grow-on-click { transform-origin:center; transition: transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s; }
-  .grow-on-click.is-clicked { transform: scale(1.08); box-shadow: var(--glow); }
-  .grow-on-click:active { transform: scale(0.96); }
+  /* Click-grow */
+  .grow-on-click{transform-origin:center; transition: transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s}
+  .grow-on-click.is-clicked{transform:scale(1.08); box-shadow:var(--glow)}
+  .grow-on-click:active{transform:scale(.96)}
 
   /* Hero */
-  .hero{padding:130px 0 90px; position:relative; overflow:hidden}
-  .hero h1{font-size:44px;line-height:1.15;margin:0 0 10px}
-  .accent{color:var(--lime)}
-  .hero p{max-width:680px;color:#cfd6e6;margin:10px 0 20px}
-  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}
+  .hero{padding:140px 0 92px; position:relative}
+  .hero h1{font-size:46px; line-height:1.15; margin:0 0 10px}
+  .accent{color:var(--secondary)}
+  .hero p{max-width:760px; color:#E7FAFF; margin:12px 0 22px}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-  .preview-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-  .preview{aspect-ratio:16/9; background:#0d1325; border:1px solid var(--border); border-radius:12px}
 
   /* Name intro animation */
-  .name-pop { display:inline-block; }
-  .name-pop span { display:inline-block; transform:translateY(12px) scale(.92); opacity:0; }
-  .name-pop span.show { animation: letterPop .7s cubic-bezier(.2,.8,.2,1) forwards; }
-  @keyframes letterPop {
-    0% { transform:translateY(12px) scale(.92); opacity:0; }
-    40% { transform:translateY(-6px) scale(1.08); opacity:1; }
-    100% { transform:translateY(0) scale(1); opacity:1; }
+  .name-pop{display:inline-block}
+  .name-pop .l{display:inline-block; transform:translateY(12px) scale(.92); opacity:0}
+  .name-pop .l.show{animation:letterPop .7s cubic-bezier(.2,.8,.2,1) forwards}
+  @keyframes letterPop{
+    0%{transform:translateY(12px) scale(.92); opacity:0}
+    45%{transform:translateY(-6px) scale(1.09); opacity:1}
+    100%{transform:translateY(0) scale(1); opacity:1}
   }
 
-  /* Sections titles */
+  /* About / grids */
   h2{font-size:30px;margin:0 0 14px}
   .muted{color:var(--muted)}
-
-  /* About facts */
   .facts{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:18px}
   .fact{padding:14px}
 
-  /* Highlights/Projects cards */
+  /* Projects (no images) */
   .grid{display:grid;gap:14px}
   .grid-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
   .proj-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-  .proj-card{padding:14px;cursor:pointer;transition:.2s}
+  .proj-card{padding:16px;cursor:pointer;transition:.2s; position:relative; overflow:hidden}
   .proj-card:hover{transform:translateY(-2px); box-shadow:var(--glow)}
+  .tile{height:120px; border:1px dashed var(--border); border-radius:12px; display:grid; place-items:center; color:#92EFFF; text-align:center; padding:10px}
 
   /* Modal */
-  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:20px}
+  .modal-backdrop{position:fixed;inset:0;background:rgba(2,10,14,.75);display:none;align-items:center;justify-content:center;padding:20px}
   .modal{max-width:760px;width:100%;padding:18px}
   .modal.open{display:flex}
 
-  /* Experience timeline */
+  /* Timeline */
   .timeline{position:relative;padding-left:24px}
   .timeline:before{content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background:var(--border)}
   .t-item{position:relative;margin:16px 0;padding-left:12px}
-  .t-item:before{content:""; position:absolute; left:-1px; top:6px; width:10px; height:10px; background:var(--lime); border-radius:50%}
+  .t-item:before{content:""; position:absolute; left:-1px; top:6px; width:10px; height:10px; background:var(--secondary); border-radius:50%}
 
-  /* Skills/Courses chips */
+  /* Chips */
   .chip{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:8px 12px;margin:6px 6px 0 0}
 
-  /* Contact panel */
-  .contact-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+  /* Contact */
+  .contact-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
   .contact-cta{padding:18px}
-  form label{display:block;font-size:14px;margin:8px 0 6px;color:#e3e8f4}
+  form label{display:block;font-size:14px;margin:8px 0 6px;color:#E8FCFF}
   input, textarea{
-    width:100%; background:#0b1320; color:var(--text); border:1px solid var(--border);
-    border-radius:12px; padding:10px 12px; outline:none; transition:.15s
+    width:100%; background:#04141A; color:var(--text); border:1px solid var(--border);
+    border-radius:12px; padding:12px 14px; outline:none; transition:.15s
   }
-  input:focus, textarea:focus{border-color:var(--lime); box-shadow:0 0 0 3px color-mix(in srgb, var(--lime) 25%, transparent)}
+  input:focus, textarea:focus{border-color:var(--secondary); box-shadow:0 0 0 3px color-mix(in srgb, var(--secondary) 28%, transparent)}
+  .contact-actions{display:flex;flex-wrap:wrap;gap:10px}
+  .wide-btn{min-width:160px}
 
   /* Footer */
-  .footer{border-top:1px solid var(--border); padding:26px 0; color:#aab3c7; font-size:14px}
+  .footer{border-top:1px solid var(--border); padding:26px 0; color:#D6FAFF; font-size:14px}
 
-  /* Scroll-in animation for sections */
+  /* Reveal on scroll */
   .reveal{opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease}
   .reveal.show{opacity:1; transform:translateY(0)}
 
-  @media (max-width:760px){
-    .hero{padding-top:110px}
+  /* ======== Mobile polish ======== */
+  @media (max-width: 860px){
+    .section{padding:72px 0}
+    .hero{padding:116px 0 72px}
     .hero h1{font-size:34px}
+    .hero p{font-size:16px}
+    .tile{height:96px}
     .contact-grid{grid-template-columns:1fr}
+    .wide-btn{width:100%}
+  }
+  @media (max-width: 360px){
+    .hero h1{font-size:30px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none!important; transition:none!important}
+    html{scroll-behavior:auto}
   }
 </style>
 </head>
 <body>
 
 <header class="header">
-  <div class="container" style="display:flex;align-items:center;justify-content:space-between;padding:12px 0">
-    <a href="#top" class="brand"><span class="name-pop" id="brandName">HASAN <span class="accent">ZEINEDDIN</span></span></a>
-    <nav class="nav" aria-label="primary">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#research">Research</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#courses">Courses</a>
-      <a href="#contact">Contact</a>
-      <a class="btn btn-primary" href="cv.pdf" target="_blank" rel="noopener">View CV</a>
-    </nav>
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;padding:10px 0; gap:10px">
+    <a href="#top" class="brand">
+      <span class="name-pop" id="brandName">HASAN <span class="accent">ZEINEDDIN</span></span>
+    </a>
+
+    <div class="nav-wrap">
+      <button class="menu-btn" id="menuBtn" aria-controls="siteNav" aria-expanded="false" aria-label="Toggle menu">
+        <span class="menu-icon"></span>
+      </button>
+      <nav id="siteNav" class="nav" aria-label="primary">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#research">Research</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#courses">Courses</a>
+        <a href="#contact">Contact</a>
+        <a class="btn btn-primary wide-btn" href="cv.pdf" target="_blank" rel="noopener">View CV</a>
+      </nav>
+    </div>
   </div>
 </header>
 
@@ -182,26 +214,28 @@
         I build <span class="accent">useful health tech</span>.
       </h1>
       <p>
-        Biomedical engineering student with a maker mindset. I learn by doing—research, code, and real-world projects—
-        and I like turning complex ideas into simple tools that help people.
+        Biomedical engineering student with a practical mindset. I design clear tools and backends,
+        contribute to research, and help teams ship reliable solutions.
       </p>
       <div class="cta-row">
-        <a class="btn btn-primary grow-on-click" href="cv.pdf" target="_blank" rel="noopener">View CV</a>
-        <a class="btn btn-outline grow-on-click" href="#projects">See My Work</a>
-        <a class="btn btn-ghost grow-on-click" href="#contact">Contact Me</a>
+        <a class="btn btn-primary grow-on-click wide-btn" href="cv.pdf" target="_blank" rel="noopener">View CV</a>
+        <a class="btn btn-outline grow-on-click wide-btn" href="#projects">See My Work</a>
+        <a class="btn btn-ghost grow-on-click wide-btn" href="#contact">Contact Me</a>
       </div>
       <div class="chips">
-        <span class="badge">Research: MSCs cartilage</span>
+        <span class="badge">MSCs cartilage research</span>
         <span class="badge">Career fair: 80+ companies</span>
         <span class="badge">Cyber Warriors (40h)</span>
       </div>
     </div>
 
-    <div class="card" style="margin-top:30px;padding:16px">
-      <div class="preview-grid">
-        <div class="preview"></div><div class="preview"></div><div class="preview"></div><div class="preview"></div>
+    <div class="card" style="margin-top:26px;padding:16px">
+      <div class="grid grid-3">
+        <div class="tile">APIs & Backends</div>
+        <div class="tile">Signal Processing</div>
+        <div class="tile">Device Explainability</div>
       </div>
-      <p class="muted" style="font-size:12px;margin:8px 2px 0">Project previews — replace with screenshots later.</p>
+      <p style="font-size:12px;color:#CFF7FF;margin:10px 2px 0">Focus areas — no images needed.</p>
     </div>
   </section>
 
@@ -209,15 +243,16 @@
   <section id="about" class="section reveal">
     <div class="container">
       <h2>About</h2>
-      <p class="muted" style="max-width:840px">
-        I’m a biomedical engineering student focused on practical impact. I’ve supported large student events,
-        volunteered at tech initiatives, joined hackathons as a backend developer, and observed medical devices
-        in a hospital environment. I’m building a strong base in engineering, research, and communication so I can
-        contribute to the next wave of healthcare technology.
+      <p class="muted" style="max-width:880px">
+        I like turning complex ideas into simple, useful things. On campus I supported the
+        registration department and helped run a career fair with 80+ companies. Outside class
+        I’ve volunteered with Fennec, joined hackathons as a backend developer, and observed how
+        medical devices are used in a hospital setting. I’m building range—engineering, research,
+        and communication—so I can contribute to safer, simpler healthcare tech.
       </p>
       <div class="facts">
         <div class="card fact"><div class="muted" style="font-size:13px">Based in</div><div>Saudi Arabia / Jordan</div></div>
-        <div class="card fact"><div class="muted" style="font-size:13px">Interests</div><div>Medical devices, signal processing, AI in healthcare</div></div>
+        <div class="card fact"><div class="muted" style="font-size:13px">Interests</div><div>Medical devices, signal processing, APIs for health</div></div>
         <div class="card fact"><div class="muted" style="font-size:13px">Languages</div><div>Arabic, English (German A2)</div></div>
         <div class="card fact"><div class="muted" style="font-size:13px">Now</div><div>Drafting manuscript on cartilage regeneration</div></div>
       </div>
@@ -230,35 +265,31 @@
       <h2>Projects</h2>
       <div class="grid proj-grid">
         <div class="card proj-card grow-on-click" data-proj="1">
-          <div class="preview"></div>
-          <h3 style="margin:10px 0 4px">Cartilage Regeneration (MSCs)</h3>
-          <div class="muted" style="font-size:14px">Research visuals & literature mapping</div>
+          <div class="tile" style="height:110px">Cartilage Regeneration (MSCs)</div>
+          <div class="muted" style="font-size:14px;margin-top:8px">Research visuals & literature mapping</div>
           <div style="margin-top:8px">
             <span class="chip">Research</span><span class="chip">Biomed</span><span class="chip">Writing</span>
           </div>
         </div>
         <div class="card proj-card grow-on-click" data-proj="2">
-          <div class="preview"></div>
-          <h3 style="margin:10px 0 4px">AI Innovators Hackathon – Backend</h3>
-          <div class="muted" style="font-size:14px">API for team submissions & scoring</div>
+          <div class="tile" style="height:110px">AI Innovators – Backend</div>
+          <div class="muted" style="font-size:14px;margin-top:8px">Submission & scoring API for finals</div>
           <div style="margin-top:8px">
             <span class="chip">Node.js</span><span class="chip">Python</span><span class="chip">Teamwork</span>
           </div>
         </div>
         <div class="card proj-card grow-on-click" data-proj="3">
-          <div class="preview"></div>
-          <h3 style="margin:10px 0 4px">Signal Processing Mini-Lab</h3>
-          <div class="muted" style="font-size:14px">ECG filtering & feature extraction</div>
+          <div class="tile" style="height:110px">Signal Processing Mini-Lab</div>
+          <div class="muted" style="font-size:14px;margin-top:8px">ECG filtering & feature extraction</div>
           <div style="margin-top:8px">
             <span class="chip">Python</span><span class="chip">DSP</span>
           </div>
         </div>
         <div class="card proj-card grow-on-click" data-proj="4">
-          <div class="preview"></div>
-          <h3 style="margin:10px 0 4px">Canva Visual Explainers</h3>
-          <div class="muted" style="font-size:14px">Patient-friendly device explainers</div>
+          <div class="tile" style="height:110px">Device Explainability</div>
+          <div class="muted" style="font-size:14px;margin-top:8px">Patient-friendly explainers (Canva)</div>
           <div style="margin-top:8px">
-            <span class="chip">Canva</span><span class="chip">Health-comms</span>
+            <span class="chip">Comms</span><span class="chip">Design</span>
           </div>
         </div>
       </div>
@@ -272,7 +303,7 @@
         <h3 id="m-title" style="margin:0;font-size:22px;font-weight:800">Project Title</h3>
         <button id="m-close" class="btn btn-ghost grow-on-click">Close</button>
       </div>
-      <div class="preview" style="margin:14px 0 10px"></div>
+      <div class="card" style="margin:14px 0 10px;padding:14px;border-style:dashed;border-color:var(--border)">Project Overview</div>
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px">
         <div class="card" style="padding:12px"><div class="muted" style="font-size:12px">Problem</div><div id="m-problem"></div></div>
         <div class="card" style="padding:12px"><div class="muted" style="font-size:12px">Approach</div><div id="m-approach"></div></div>
@@ -289,12 +320,9 @@
       <div class="card" style="padding:18px">
         <h3 style="margin:0">Cartilage Regeneration with Mesenchymal Stem Cells</h3>
         <p class="muted" style="margin:10px 0 14px;max-width:900px">
-          Collaborative work with a medical student (Egypt) studying how MSCs support cartilage repair and how new tissue integrates with
-          osteochondral structures. Produced a full report; manuscript in preparation.
+          Joint study with a medical student (Egypt) on how MSCs support cartilage repair and how new tissue
+          integrates with bone. Delivered a full report; manuscript in preparation.
         </p>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px">
-          <div class="preview"></div><div class="preview"></div><div class="preview"></div>
-        </div>
       </div>
     </div>
   </section>
@@ -308,14 +336,14 @@
           <div class="card" style="padding:14px">
             <div style="font-weight:700">Usher – Registration Department</div>
             <div class="muted" style="font-size:14px">German Jordanian University, Madaba</div>
-            <div style="font-size:14px;margin-top:6px">Guided enrollment and ensured accurate records for new students.</div>
+            <div style="font-size:14px;margin-top:6px">Guided enrollment and kept records accurate for new students.</div>
           </div>
         </div>
         <div class="t-item">
           <div class="card" style="padding:14px">
             <div style="font-weight:700">Usher – Career Fair (80+ companies)</div>
             <div class="muted" style="font-size:14px">German Jordanian University, Madaba</div>
-            <div style="font-size:14px;margin-top:6px">Coordinated with a partner company; supported logistics and communication on the day.</div>
+            <div style="font-size:14px;margin-top:6px">Coordinated with a partner company; supported logistics and attendee flow.</div>
           </div>
         </div>
         <div class="t-item">
@@ -343,7 +371,7 @@
       <div class="grid grid-3">
         <div class="card" style="padding:14px">
           <div class="muted" style="font-size:12px">Technical</div>
-          <div style="margin-top:6px">AutoCAD (Intermediate), Node.js (Beginner/Intermediate), C (Intermediate), Python (Intermediate), Research & Academic Writing (Proficient)</div>
+          <div style="margin-top:6px">AutoCAD (Intermediate), Node.js (Beg/Int), C (Intermediate), Python (Intermediate), Research & Academic Writing (Proficient)</div>
         </div>
         <div class="card" style="padding:14px">
           <div class="muted" style="font-size:12px">Soft</div>
@@ -376,26 +404,21 @@
     <div class="container">
       <h2>Contact</h2>
       <div class="contact-grid">
-        <!-- Left: direct actions -->
         <div class="card contact-cta">
           <h3 style="margin:0 0 6px">Let’s build something useful</h3>
-          <p class="muted" style="margin:0 0 14px">I usually reply within 24–48 hours. You can also reach me instantly via WhatsApp.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:10px">
-            <a class="btn btn-primary grow-on-click" href="mailto:zeinddin.kamel@gmail.com">Email me</a>
-            <a class="btn btn-outline grow-on-click" href="tel:+962798043524">Call: +962 798043524</a>
-            <a class="btn btn-ghost grow-on-click" href="https://wa.me/962798043524" target="_blank" rel="noopener">WhatsApp</a>
+          <p class="muted" style="margin:0 0 14px">I typically reply within 24–48 hours. For urgent questions, WhatsApp is fastest.</p>
+          <div class="contact-actions">
+            <a class="btn btn-primary grow-on-click wide-btn" href="mailto:zeinddin.kamel@gmail.com">Email me</a>
+            <a class="btn btn-outline grow-on-click wide-btn" href="tel:+962798043524">Call: +962 798043524</a>
+            <a class="btn btn-ghost grow-on-click wide-btn" href="https://wa.me/962798043524" target="_blank" rel="noopener">WhatsApp</a>
           </div>
         </div>
-        <!-- Right: Netlify form -->
         <form name="contact" method="POST" data-netlify="true" class="card" style="padding:18px">
           <input type="hidden" name="form-name" value="contact" />
           <label>Name<input name="name" required /></label>
           <label>Email<input type="email" name="email" required /></label>
           <label>Message<textarea rows="6" name="message" required></textarea></label>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-            <button class="btn btn-primary grow-on-click" type="submit">Send message</button>
-            <a class="btn btn-outline grow-on-click" href="cv.pdf" target="_blank" rel="noopener">Download CV</a>
-          </div>
+          <button class="btn btn-primary grow-on-click wide-btn" type="submit">Send message</button>
         </form>
       </div>
     </div>
@@ -415,10 +438,22 @@
 </footer>
 
 <script>
-  // 1) Year
+  // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // 2) On-load name animation (hero & brand)
+  // Hamburger open/close
+  const menuBtn = document.getElementById('menuBtn');
+  const nav = document.getElementById('siteNav');
+  menuBtn.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  // Close menu after clicking a link (mobile)
+  nav.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', ()=> nav.classList.remove('open'));
+  });
+
+  // Name intro animation (hero & brand) – preserve spaces
   function animateName(id, delay=0){
     const el = document.getElementById(id);
     if(!el) return;
@@ -426,7 +461,8 @@
     el.innerHTML = '';
     [...text].forEach((ch, i)=>{
       const span = document.createElement('span');
-      span.textContent = ch;
+      span.className = 'l';
+      span.textContent = ch === ' ' ? '\\u00A0' : ch;
       el.appendChild(span);
       setTimeout(()=> span.classList.add('show'), delay + i*45);
     });
@@ -436,14 +472,14 @@
     animateName('brandName', 0);
   });
 
-  // 3) Reveal sections on scroll
+  // Reveal on scroll
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
   }, {threshold: .12});
   revealEls.forEach(el=> io.observe(el));
 
-  // 4) Smooth scroll with animated offset + active link highlight
+  // Smooth scroll + active nav + click-grow
   const header = document.querySelector('.header');
   const navLinks = document.querySelectorAll('.nav a[href^="#"]');
   function setActiveLink(hash){
@@ -455,16 +491,13 @@
       ev.preventDefault();
       const target = document.querySelector(link.getAttribute('href'));
       if(!target) return;
-      // grow pop
       link.classList.add('is-clicked'); setTimeout(()=>link.classList.remove('is-clicked'), 180);
-      // animated scroll with offset (header height)
       const headerH = header.getBoundingClientRect().height + 8;
       const top = target.getBoundingClientRect().top + window.scrollY - headerH;
       window.scrollTo({ top, behavior:'smooth' });
       setActiveLink(link.getAttribute('href'));
     });
   });
-  // highlight current section while scrolling
   const sections = [...document.querySelectorAll('section[id]')];
   window.addEventListener('scroll', ()=>{
     let current = '#about';
@@ -475,37 +508,36 @@
     setActiveLink(current);
   });
 
-  // 5) Click-pop for all buttons
-  const buttons = document.querySelectorAll('.btn');
-  buttons.forEach(el=>{
+  // Click-pop for all buttons
+  document.querySelectorAll('.btn').forEach(el=>{
     el.classList.add('grow-on-click');
     const pop = ()=>{ el.classList.add('is-clicked'); setTimeout(()=>el.classList.remove('is-clicked'),180); };
     el.addEventListener('click', pop);
     el.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' ') pop(); });
   });
 
-  // 6) Project modal content
+  // Project modal content
   const projData = {
     1:{title:'Cartilage Regeneration (MSCs)',
-       problem:'Communicating literature on cartilage repair and integration.',
-       approach:'Mapped key studies, created clear visuals and concise summaries.',
-       outcome:'Crisp narrative & figures supporting manuscript preparation.',
-       learned:'How to translate complex research into useful visuals.'},
-    2:{title:'AI Innovators Hackathon – Backend',
-       problem:'Fast, reliable API for submissions & scoring.',
-       approach:'Designed endpoints, handled auth, wrote docs & quick tests.',
-       outcome:'Stable finals; judges accessed results smoothly.',
+       problem:'Summarize cartilage repair & integration literature.',
+       approach:'Mapped key studies; built visuals; drafted clear summaries.',
+       outcome:'Narrative and figures that support manuscript writing.',
+       learned:'Translate complex biology into practical, readable outputs.'},
+    2:{title:'AI Innovators – Backend',
+       problem:'Stable API for submissions & scoring.',
+       approach:'Designed endpoints; auth; docs; quick tests.',
+       outcome:'Smooth finals; judges accessed results reliably.',
        learned:'Plan first; small tests save time.'},
     3:{title:'Signal Processing Mini-Lab',
        problem:'Noisy ECG signals reduce feature quality.',
-       approach:'Applied filters, extracted features, validated on samples.',
+       approach:'Applied filters; extracted features; validated on samples.',
        outcome:'Cleaner signals and more reliable features.',
        learned:'DSP basics + value of visual checks.'},
-    4:{title:'Canva Visual Explainers',
+    4:{title:'Device Explainability',
        problem:'People struggled to grasp device ideas quickly.',
-       approach:'Built friendly visuals and micro-explainers.',
-       outcome:'Faster comprehension in demos.',
-       learned:'Good visuals reduce confusion.'}
+       approach:'Created patient-friendly explainers and structured notes.',
+       outcome:'Faster understanding in demos and reviews.',
+       learned:'Clarity beats complexity.'}
   };
   const modal = document.getElementById('modal');
   const mTitle = document.getElementById('m-title');
@@ -525,7 +557,6 @@
       mOutcome.textContent = d.outcome;
       mLearned.textContent = d.learned;
       modal.classList.add('open');
-      // pop effect on open
       card.classList.add('is-clicked'); setTimeout(()=>card.classList.remove('is-clicked'),180);
     });
   });

@@ -462,7 +462,7 @@
     [...text].forEach((ch, i)=>{
       const span = document.createElement('span');
       span.className = 'l';
-      span.textContent = ch === ' ' ? '\\u00A0' : ch;
+      span.textContent = ch === ' ' ? '\u00A0' : ch;
       el.appendChild(span);
       setTimeout(()=> span.classList.add('show'), delay + i*45);
     });

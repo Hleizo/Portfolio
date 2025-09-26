@@ -4,11 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Hasan Zeineddin — Biomedical Engineering</title>
-<meta name="description" content="Hasan Zeineddin — biomedical engineering portfolio: projects, research, experience and contact." />
-
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+<meta name="description" content="Hasan Zeineddin — biomedical engineering portfolio: research, projects, experience and contact." />
 
 <style>
 /* ================= THEME ================= */
@@ -27,8 +23,6 @@
   --radius:16px;
   --shadow:0 18px 36px rgba(0,0,0,.35);
   --glow:0 0 28px rgba(34,211,238,.45);
-  --container:1100px;
-  --easing:cubic-bezier(.2,.8,.2,1);
 }
 
 /* Light mode */
@@ -53,17 +47,16 @@
 html,body{height:100%}
 body{
   margin:0; color:var(--text);
-  font-family:'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-  line-height:1.65; overflow-x:hidden;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  line-height:1.6; overflow-x:hidden;
   background:
     radial-gradient(900px 420px at 8% -10%, color-mix(in srgb, var(--primary-2) 28%, transparent), transparent 60%),
     radial-gradient(850px 420px at 92% 110%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%),
     var(--bg);
 }
-h1,h2,h3{font-family:'Plus Jakarta Sans', Inter, ui-sans-serif, system-ui}
 a{color:inherit; text-decoration:none}
-.container{max-width:var(--container);margin:0 auto;padding:0 20px}
-.section{padding:clamp(64px, 8vw, 96px) 0}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+.section{padding:96px 0}
 .card{
   background:var(--panel);
   border:1px solid var(--border);
@@ -77,7 +70,7 @@ a{color:inherit; text-decoration:none}
   display:inline-flex; align-items:center; justify-content:center;
   padding:12px 18px; border-radius:999px; border:1px solid transparent;
   font-weight:600; letter-spacing:.2px; cursor:pointer;
-  transition:transform .22s var(--easing), box-shadow .22s, filter .22s, background .22s;
+  transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s, filter .22s, background .22s;
 }
 .btn-primary{background:var(--primary); color:var(--ink)}
 .btn-primary:hover{filter:brightness(.98); box-shadow:var(--glow)}
@@ -104,7 +97,7 @@ a{color:inherit; text-decoration:none}
   content:""; position:absolute; left:50%; transform:translateX(-50%);
   bottom:-2px; width:28px; height:2px; background:var(--primary-2); border-radius:2px;
 }
-.nav-wrap{display:flex;align-items:center;gap:10px}
+.nav-wrap{display:flex;align-items:center;gap:16px}
 .menu-btn{display:none; border:1px solid var(--border); background:transparent; color:var(--text);
   border-radius:10px; padding:10px 12px; line-height:0}
 .menu-icon{width:22px;height:2px;background:var(--text);position:relative;display:block;transition:.25s}
@@ -130,13 +123,13 @@ a{color:inherit; text-decoration:none}
 
 /* Hero */
 .hero{padding:140px 0 64px}
-.hero h1{font-size:clamp(2.25rem, 2vw + 1.5rem, 3.25rem); line-height:1.15; margin:0 0 12px}
+.hero h1{font-size:46px; line-height:1.15; margin:0 0 12px}
 .hero p{max-width:760px; color:color-mix(in srgb, var(--text) 92%, transparent); margin:12px 0 22px}
 .w{display:inline-block; opacity:0; transform:translateY(12px)}
-.w.show{animation:wIn .6s var(--easing) forwards}
+.w.show{animation:wIn .6s cubic-bezier(.2,.8,.2,1) forwards}
 @keyframes wIn{to{opacity:1; transform:translateY(0)}}
 .underline{position:relative; display:inline-block}
-.underline::after{content:""; position:absolute; left:0; right:0; bottom:-4px; height:3px; border-radius:2px; background:linear-gradient(90deg, var(--primary), var(--primary-2)); transform:scaleX(0); transform-origin:left; animation:uline .7s .3s var(--easing) forwards}
+.underline::after{content:""; position:absolute; left:0; right:0; bottom:-4px; height:3px; border-radius:2px; background:linear-gradient(90deg, var(--primary), var(--primary-2)); transform:scaleX(0); transform-origin:left; animation:uline .7s .3s cubic-bezier(.2,.8,.2,1) forwards}
 @keyframes uline{to{transform:scaleX(1)}}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}
 
@@ -147,7 +140,7 @@ a{color:inherit; text-decoration:none}
   position:relative; overflow:hidden; border-radius:18px; border:1px solid var(--border);
   background:linear-gradient(180deg, var(--panel), var(--panel-soft));
   padding:16px 16px 16px 68px; min-height:88px;
-  transition:transform .25s var(--easing), box-shadow .25s;
+  transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s;
   box-shadow:var(--shadow);
 }
 .h-card:hover{ transform: translateY(-2px); box-shadow:var(--glow) }
@@ -166,11 +159,11 @@ a{color:inherit; text-decoration:none}
 .h-sub{color:var(--muted); font-size:14px; margin-top:6px}
 
 /* Section basics */
-h2{font-size:clamp(1.5rem, 1vw + 1.1rem, 2rem);margin:0 0 16px}
+h2{font-size:30px;margin:0 0 16px}
 .muted{color:var(--muted)}
-.grid{display:grid;gap:16px}
+.grid{display:grid;gap:14px}
 
-/* Projects (single) */
+/* Projects */
 .proj-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
 .proj-card{
   display:block; position:relative; overflow:hidden; border-radius:18px;
@@ -178,16 +171,16 @@ h2{font-size:clamp(1.5rem, 1vw + 1.1rem, 2rem);margin:0 0 16px}
   transition:transform .25s, box-shadow .25s;
 }
 .proj-card:hover{transform:translateY(-3px); box-shadow:var(--glow)}
-.proj-media{position:relative; height:200px; overflow:hidden; border-bottom:1px dashed var(--border)}
+.proj-media{position:relative; height:160px; overflow:hidden; border-bottom:1px dashed var(--border)}
 .proj-media img{width:100%; height:100%; object-fit:cover; transform:scale(1.03); transition:transform .35s}
 .proj-card:hover .proj-media img{transform:scale(1.08)}
-.proj-body{padding:16px}
+.proj-body{padding:14px}
 .proj-title{font-weight:800; margin:0 0 6px}
 .proj-tags{margin-top:8px}
 .chip{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:8px 12px;margin:6px 6px 0 0}
 
 /* Ripple + click transition */
-.proj-card.clicked{transform:scale(.98); opacity:.88}
+.proj-card.clicked{transform:scale(.98); opacity:.85}
 .ripple{
   position:absolute; border-radius:50%; transform:scale(0); opacity:.45;
   background:radial-gradient(circle, var(--primary-2) 0%, transparent 60%);
@@ -229,10 +222,13 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
 
 /* Mobile */
 @media (max-width: 880px){
+  .section{padding:76px 0}
   .hero{padding:120px 0 36px}
+  .hero h1{font-size:36px}
   .highlights{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr}
 }
+@media (max-width: 360px){ .hero h1{font-size:30px} }
 @media (prefers-reduced-motion: reduce){
   *{animation:none!important; transition:none!important}
   html{scroll-behavior:auto}
@@ -245,8 +241,8 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
 
 <header class="header">
   <div class="container" style="display:flex;align-items:center;justify-content:space-between;padding:10px 0; gap:10px">
-    <a href="#top" class="brand">HASAN <span class="accent" style="color:var(--primary-2)">ZEINEDDIN</span></a>
-    <div class="nav-wrap">
+    <a href="#top" class="brand">HASAN <span class="accent">ZEINEDDIN</span></a>
+    <div class="nav-wrap" style="gap:10px">
       <button class="theme-toggle" id="themeBtn" title="Toggle theme">🌓</button>
       <button class="menu-btn" id="menuBtn" aria-controls="siteNav" aria-expanded="false" aria-label="Toggle menu">
         <span class="menu-icon"></span>
@@ -269,14 +265,14 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
 
   <!-- HERO -->
   <section class="hero container">
-    <h1>
+    <h1 aria-label="Hi, I’m Hasan Zeineddin. Engineering meets medicine where ideas become life-saving solutions.">
       <span class="w">Hi,</span> <span class="w">I’m</span> <span class="w">Hasan</span> <span class="w">Zeineddin.</span><br/>
       <span class="w">Engineering</span> <span class="w">meets</span> <span class="w underline">medicine</span> <span class="w">where</span> <span class="w">ideas</span> <span class="w">become</span> <span class="w">life-saving</span> <span class="w underline">solutions.</span>
     </h1>
     <p>Biomedical engineering with purpose, precision, and impact.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://drive.google.com/file/d/1tJJ_Tq1KqUxplsy2WAcBwJKNIzPHRS7-/view?usp=sharing" target="_blank" rel="noopener">View CV</a>
-      <a class="btn btn-outline" href="#projects">See Project</a>
+      <a class="btn btn-outline" href="#projects">See Projects</a>
       <a class="btn btn-ghost" href="#contact">Contact</a>
     </div>
 
@@ -292,37 +288,47 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
         <div class="h-title">MSCs Cartilage Research</div>
         <div class="h-sub">Regenerative repair & tissue integration; manuscript in preparation.</div>
       </a>
+      <a class="h-card" href="#experience">
+        <div class="h-ico" aria-hidden="true">🤝</div>
+        <div class="h-title">Technological Collaboration</div>
+        <div class="h-sub">Exploring new technologies, gaining hands-on experience, and building resilience under pressure.</div>
+      </a>
+      <a class="h-card" href="#contact">
+        <div class="h-ico" aria-hidden="true">📬</div>
+        <div class="h-title">Let’s Connect</div>
+        <div class="h-sub">Open to collaborations, fresh ideas, and opportunities to make an impact in biomedical engineering.</div>
+      </a>
     </div>
   </section>
 
-  <!-- ABOUT (3 lines) -->
+  <!-- ABOUT -->
   <section id="about" class="section reveal">
     <div class="container">
       <h2>About</h2>
       <p class="muted" style="max-width:880px">
-        Biomedical engineering lets me connect problem-solving with meaningful healthcare challenges. <br/>
-        I focus on clarity, steady progress, and collaboration in every project I take on. <br/>
-        My goal is to build practical, reliable solutions that improve health and make a real difference.
+        Biomedical engineering gives me a way to connect problem-solving with real healthcare needs.
+        Through studies, events, and hands-on exposure, I’m learning to combine technical skills with clear communication.
+        My goal is to contribute to health technologies that are simple, safe, and effective.
       </p>
     </div>
   </section>
 
-  <!-- PROJECTS (single research project) -->
+  <!-- PROJECTS -->
   <section id="projects" class="section reveal">
     <div class="container">
       <h2>Projects</h2>
 
       <div class="grid proj-grid">
+        <!-- Project card that opens Google Doc smoothly -->
         <a class="proj-card proj-link"
            href="https://docs.google.com/document/d/1o0-bFrxXejnF2Rc6oAK_qTpC2oxxbGKL_Lp9kkK53pQ/edit?usp=sharing"
            target="_blank" rel="noopener">
           <div class="proj-media">
-            <!-- Replace src with your public image or keep file name and upload it next to index.html -->
-            <img src="project-mscs.jpg" alt="Cartilage regeneration research report cover" loading="lazy" />
+            <img src="project-mscs.jpg" alt="MSCs cartilage regeneration project cover" />
           </div>
           <div class="proj-body">
             <div class="proj-title">Cartilage Regeneration (MSCs)</div>
-            <div class="muted" style="font-size:14px">Collaborative study; literature synthesis & visuals. Google Doc.</div>
+            <div class="muted" style="font-size:14px">Research report & figures (Google Docs)</div>
             <div class="proj-tags">
               <span class="chip">MSCs</span>
               <span class="chip">Cartilage</span>
@@ -335,7 +341,7 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
     </div>
   </section>
 
-  <!-- RESEARCH (glowing ECG line) -->
+  <!-- RESEARCH (glowing line) -->
   <section id="research" class="section reveal">
     <div class="container">
       <h2>Research</h2>
@@ -384,16 +390,16 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
   <section id="skills" class="section reveal">
     <div class="container">
       <h2>Skills</h2>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px">
-        <div class="card" style="padding:16px">
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px">
+        <div class="card" style="padding:14px">
           <div class="muted" style="font-size:12px">Technical</div>
           <div style="margin-top:6px">AutoCAD (Intermediate), C (Intermediate), Python (Intermediate), Node.js (Beg/Int), Research & Academic Writing (Proficient)</div>
         </div>
-        <div class="card" style="padding:16px">
-          <div class="muted" style="font-size:12px">Collaboration</div>
-          <div style="margin-top:6px">Teamwork, Supportive Communication, Event Coordination</div>
+        <div class="card" style="padding:14px">
+          <div class="muted" style="font-size:12px">Soft</div>
+          <div style="margin-top:6px">Teamwork, Patience, Supportive Communication, Event Coordination</div>
         </div>
-        <div class="card" style="padding:16px">
+        <div class="card" style="padding:14px">
           <div class="muted" style="font-size:12px">Languages</div>
           <div style="margin-top:6px">Arabic (Native), English (Fluent), German (A2)</div>
         </div>
@@ -430,14 +436,11 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
             <a class="btn btn-outline wide-btn" href="https://www.linkedin.com/in/hasan-zeineddin-2015442b3" target="_blank" rel="noopener">LinkedIn</a>
           </div>
         </div>
-
-        <!-- FORM: Add your Formspree endpoint ID below -->
-        <form id="contactForm" class="card" style="padding:18px">
+        <form class="card" style="padding:18px">
           <label>Name<input name="name" required /></label>
           <label>Email<input type="email" name="email" required /></label>
           <label>Message<textarea rows="6" name="message" required></textarea></label>
-          <button class="btn btn-primary wide-btn" type="submit">Send message</button>
-          <div id="formStatus" class="muted" style="margin-top:8px;font-size:14px;"></div>
+          <button class="btn btn-primary wide-btn" type="submit" onclick="alert('Thanks! For live email, connect Formspree/EmailJS.'); return false;">Send message</button>
         </form>
       </div>
     </div>
@@ -457,9 +460,6 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
 </footer>
 
 <script>
-/* ===== Config: put your Formspree ID here ===== */
-const FORMSPREE_ID = 'REPLACE_FORMSPREE_ID'; // e.g. 'xyzabcde'
-
 /* Year + hero word reveal */
 document.getElementById('year').textContent = new Date().getFullYear();
 window.addEventListener('load', ()=> {
@@ -533,6 +533,7 @@ document.querySelectorAll('.h-card').forEach(card=>{
 document.querySelectorAll('.proj-link').forEach(card => {
   card.addEventListener('click', (e) => {
     e.preventDefault();
+    // ripple
     const r = card.getBoundingClientRect();
     const x = (e.clientX || (r.left + r.width/2)) - r.left;
     const y = (e.clientY || (r.top  + r.height/2)) - r.top;
@@ -542,6 +543,7 @@ document.querySelectorAll('.proj-link').forEach(card => {
     ripple.style.top  = y + 'px';
     ripple.style.width = ripple.style.height = Math.max(r.width, r.height) + 'px';
     card.appendChild(ripple);
+    // click anim
     card.classList.add('clicked');
     setTimeout(() => {
       window.open(card.href, '_blank', 'noopener');
@@ -550,36 +552,6 @@ document.querySelectorAll('.proj-link').forEach(card => {
     }, 350);
   });
 });
-
-/* Contact form via Formspree (no backend) */
-const contactForm = document.getElementById('contactForm');
-const statusEl = document.getElementById('formStatus');
-if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (!FORMSPREE_ID || FORMSPREE_ID === 'REPLACE_FORMSPREE_ID') {
-      alert('Form is not configured yet. Add your Formspree ID in the code.');
-      return;
-    }
-    statusEl.textContent = 'Sending…';
-    const data = new FormData(contactForm);
-    try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        contactForm.reset();
-        statusEl.textContent = 'Thanks! Your message was sent.';
-      } else {
-        statusEl.textContent = 'Something went wrong. Please email me directly.';
-      }
-    } catch {
-      statusEl.textContent = 'Network error. Please email me directly.';
-    }
-  });
-}
 </script>
 
 </body>

@@ -59,6 +59,71 @@
   .btn-ghost:hover{background:color-mix(in srgb, var(--accent) 14%, transparent); border-color:var(--accent)}
   .btn:active{transform:scale(.96)}
   .badge{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted)}
+/* ===== ORBIT FACTS ===== */
+.orbit-wrap{ position:relative; height:280px; margin-top:26px; }
+.orbit-core{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:160px; height:160px; border-radius:50%;
+  background:var(--panel-soft); border:1px solid var(--border);
+  box-shadow:inset 0 0 24px rgba(34,211,238,.18);
+  display:grid; place-items:center; text-align:center; padding:10px;
+}
+.orbit-core .core-title{ font-weight:800; color:var(--muted); }
+
+/* dashed orbits */
+.orbit-wrap::before, .orbit-wrap::after{
+  content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  border:1px dashed var(--border); border-radius:50%;
+}
+.orbit-wrap::before{ width:340px; height:340px; opacity:.6; }
+.orbit-wrap::after{ width:500px; height:500px; opacity:.35; }
+
+/* the “planets” */
+.planet{
+  position:absolute; left:50%; top:50%;
+  width:64px; height:64px; border-radius:50%;
+  display:grid; place-items:center; font-size:28px; text-decoration:none;
+  background: radial-gradient(circle at 30% 30%, #0ef, #0889a3);
+  border:1px solid color-mix(in srgb, var(--primary-2) 50%, transparent);
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.35));
+  transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s;
+}
+.planet:hover{ transform:scale(1.08); box-shadow:var(--glow); }
+
+/* orbital paths/speeds */
+.p1{ animation:orbit1 16s linear infinite;  }
+.p2{ animation:orbit2 22s linear infinite reverse; }
+.p3{ animation:orbit3 28s linear infinite; }
+.p4{ animation:orbit4 20s linear infinite reverse; }
+
+@keyframes orbit1{ from{ transform: rotate(0)   translateX(170px) } to{ transform: rotate(360deg) translateX(170px) } }
+@keyframes orbit2{ from{ transform: rotate(0)   translateX(250px) } to{ transform: rotate(360deg) translateX(250px) } }
+@keyframes orbit3{ from{ transform: rotate(180deg) translateX(250px) } to{ transform: rotate(540deg) translateX(250px) } }
+@keyframes orbit4{ from{ transform: rotate(180deg) translateX(170px) } to{ transform: rotate(540deg) translateX(170px) } }
+
+/* tooltip */
+.orbit-tooltip{
+  position:absolute; padding:12px 14px; background:var(--panel);
+  border:1px solid var(--border); border-radius:12px; max-width:260px;
+  pointer-events:none; opacity:0; transform:translate(-50%,-18px); transition:.15s;
+}
+.orbit-tooltip strong{ display:block; font-weight:800; margin-bottom:4px; }
+.orbit-tooltip.show{ opacity:1; }
+
+/* responsive */
+@media (max-width:880px){
+  .orbit-wrap{ height:360px; }
+  .orbit-core{ width:140px; height:140px; }
+  .orbit-wrap::before{ width:300px; height:300px }
+  .orbit-wrap::after{ width:420px; height:420px }
+  .planet{ width:58px; height:58px; font-size:24px; }
+}
+@media (max-width:560px){
+  /* On very small screens, show chips instead */
+  .orbit-wrap{ display:none; }
+  .facts-stack{ display:grid; gap:10px; margin-top:10px; }
+  .facts-stack .chip{ font-size:14px }
+}
 
   /* ========== HEADER / NAV ========== */
   .header{
@@ -237,13 +302,42 @@
       <span class="badge">Ongoing AI in Medicine Exploration</span>
     </div>
 
-    <div class="card" style="margin-top:28px;padding:16px">
-      <div class="grid grid-3">
-        <div class="tile">APIs & Backends</div>
-        <div class="tile">Signal Processing</div>
-        <div class="tile">Device Explainability</div>
-      </div>
-    </div>
+<!-- START: Orbit Facts (replaces the old 3 boxes) -->
+<div class="orbit-wrap">
+  <div class="orbit-core">
+    <div class="core-title">What I’m about</div>
+  </div>
+
+  <!-- Orbiting “planets” (hover/tap for details) -->
+  <a class="planet p1" href="#about"
+     data-title="Biomedical Engineering (GJU)"
+     data-desc="Hands-on and lab-driven, with a focus on impact.">🎓</a>
+
+  <a class="planet p2" href="#research"
+     data-title="MSCs Cartilage Research"
+     data-desc="Regenerative repair & tissue integration with bone; manuscript in prep.">🧬</a>
+
+  <a class="planet p3" href="#experience"
+     data-title="Hackathons & Collaboration"
+     data-desc="Backend dev, fast prototyping, and clear team comms.">🤝</a>
+
+  <a class="planet p4" href="#contact"
+     data-title="Jordan & Saudi Experience"
+     data-desc="Studying and volunteering across both communities.">🌍</a>
+
+  <!-- Tooltip shown on hover/tap -->
+  <div class="orbit-tooltip" id="orbitTip"><strong></strong><span></span></div>
+</div>
+
+<!-- Mobile fallback (shown on very small screens) -->
+<div class="facts-stack">
+  <span class="chip">🎓 Biomedical Engineering (GJU)</span>
+  <span class="chip">🧬 MSCs Cartilage Research</span>
+  <span class="chip">🤝 Hackathons & Collaboration</span>
+  <span class="chip">🌍 Jordan & Saudi Experience</span>
+</div>
+<!-- END: Orbit Facts -->
+
   </section>
 
   <!-- ABOUT -->
@@ -540,6 +634,36 @@
   });
   closeBtn.addEventListener('click', ()=> modal.classList.remove('open'));
   modal.addEventListener('click', (e)=>{ if(e.target===modal){ modal.classList.remove('open'); }});
+  // ===== Orbit tooltip behavior =====
+const tip = document.getElementById('orbitTip');
+document.querySelectorAll('.planet').forEach(p=>{
+  // show on hover/touch
+  const show = (e)=>{
+    if(!tip) return;
+    tip.querySelector('strong').textContent = p.dataset.title || '';
+    tip.querySelector('span').textContent   = p.dataset.desc  || '';
+    const r = p.getBoundingClientRect();
+    tip.style.left = (e.clientX || (r.left + r.width/2)) + 'px';
+    tip.style.top  = ((e.clientY || r.top) + window.scrollY - 24) + 'px';
+    tip.classList.add('show');
+  };
+  const move = (e)=>{
+    if(!tip) return;
+    tip.style.left = e.clientX + 'px';
+    tip.style.top  = (e.clientY + window.scrollY - 24) + 'px';
+  };
+  const hide = ()=> tip && tip.classList.remove('show');
+
+  p.addEventListener('mouseenter', show);
+  p.addEventListener('mousemove', move);
+  p.addEventListener('mouseleave', hide);
+
+  // basic touch support
+  p.addEventListener('touchstart', (e)=>{ show(e.touches[0]); }, {passive:true});
+  p.addEventListener('touchmove',  (e)=>{ move(e.touches[0]); }, {passive:true});
+  p.addEventListener('touchend', hide);
+});
+
 </script>
 
 </body>

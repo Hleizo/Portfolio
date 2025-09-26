@@ -181,6 +181,56 @@
   }
   @media (max-width: 360px){ .hero h1{font-size:30px} }
   @media (prefers-reduced-motion: reduce){ *{animation:none!important; transition:none!important} html{scroll-behavior:auto} }
+  /* Subtle animated dots (About section filler) */
+.mini-anim {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 40px 0;
+}
+.mini-anim span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--primary-2);
+  opacity: 0.6;
+  animation: pulseAnim 1.5s infinite;
+}
+.mini-anim span:nth-child(2) { animation-delay: 0.3s; }
+.mini-anim span:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes pulseAnim {
+  0%, 100% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+/* Project click animation */
+.proj-card {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.proj-card.clicked {
+  transform: scale(0.95);
+  opacity: 0.6;
+}
+/* Glowing research line */
+.glow-line {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  height: 4px;
+  margin: 60px auto;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary-2), transparent);
+  background-size: 200% 100%;
+  animation: glow-move 3s linear infinite;
+  box-shadow: 0 0 12px rgba(34,211,238,0.6);
+}
+
+@keyframes glow-move {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 </style>
 </head>
 <body>
@@ -238,13 +288,13 @@
       </a>
       <a class="h-card" href="#experience">
         <div class="h-ico" aria-hidden="true">🤝</div>
-        <div class="h-title">Hackathons & Collaboration</div>
-        <div class="h-sub">Backend builds, fast prototyping, and crisp team communication.</div>
+        <div class="h-title">Technological Collaboration</div>
+        <div class="h-sub">Exploring new technologies, gaining hands-on experience, and building resilience under pressure.</div>
       </a>
       <a class="h-card" href="#contact">
         <div class="h-ico" aria-hidden="true">🌍</div>
-        <div class="h-title">Jordan & Saudi Experience</div>
-        <div class="h-sub">Studying and volunteering across both communities.</div>
+        <div class="h-title">Let’s Connect</div>
+        <div class="h-sub">Open to collaborations, fresh ideas, and opportunities to make an impact in biomedical engineering.</div>
       </a>
     </div>
   </section>
@@ -254,17 +304,14 @@
     <div class="container">
       <h2>About</h2>
       <p class="muted" style="max-width:880px">
-        I turn complex ideas into clear, practical tools. On campus I supported the registration department
-        and helped run a career fair with 80+ companies. Beyond class I’ve volunteered with Fennec, joined
-        hackathons as a backend developer, and observed medical devices in a hospital setting. I’m building
-        range—engineering, research, and communication—so I can contribute to safer, simpler health tech.
+        Biomedical engineering gives me a way to connect problem-solving with real healthcare needs.
+        Through studies, events, and hands-on exposure, I’m learning to combine technical skills with clear communication.  
+        My goal is to contribute to health technologies that are simple, safe, and effective.
       </p>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:18px">
-        <div class="card" style="padding:14px"><div class="muted" style="font-size:13px">Based in</div><div>Saudi Arabia / Jordan</div></div>
-        <div class="card" style="padding:14px"><div class="muted" style="font-size:13px">Interests</div><div>Medical devices, signal processing, APIs for health</div></div>
-        <div class="card" style="padding:14px"><div class="muted" style="font-size:13px">Languages</div><div>Arabic, English (German A2)</div></div>
-        <div class="card" style="padding:14px"><div class="muted" style="font-size:13px">Now</div><div>Drafting manuscript on cartilage regeneration</div></div>
-      </div>
+      <!-- Subtle animated dots -->
+<div class="mini-anim reveal">
+  <span></span><span></span><span></span>
+</div>
     </div>
   </section>
 
@@ -273,26 +320,20 @@
     <div class="container">
       <h2>Projects</h2>
       <div class="grid proj-grid">
-        <div class="proj-card" data-proj="1">
-          <div class="tile" style="height:110px">Cartilage Regeneration (MSCs)</div>
-          <div class="muted" style="font-size:14px;margin-top:8px">Research visuals & literature mapping</div>
-          <div style="margin-top:8px"><span class="chip">Research</span><span class="chip">Biomed</span><span class="chip">Writing</span></div>
-        </div>
-        <div class="proj-card" data-proj="2">
-          <div class="tile" style="height:110px">AI Innovators — Backend</div>
-          <div class="muted" style="font-size:14px;margin-top:8px">Submission & scoring API for finals</div>
-          <div style="margin-top:8px"><span class="chip">Node.js</span><span class="chip">Python</span><span class="chip">Teamwork</span></div>
-        </div>
-        <div class="proj-card" data-proj="3">
-          <div class="tile" style="height:110px">Signal Processing Mini-Lab</div>
-          <div class="muted" style="font-size:14px;margin-top:8px">ECG filtering & feature extraction</div>
-          <div style="margin-top:8px"><span class="chip">Python</span><span class="chip">DSP</span></div>
-        </div>
-        <div class="proj-card" data-proj="4">
-          <div class="tile" style="height:110px">Device Explainability</div>
-          <div class="muted" style="font-size:14px;margin-top:8px">Patient-friendly explainers (Canva)</div>
-          <div style="margin-top:8px"><span class="chip">Comms</span><span class="chip">Design</span></div>
-        </div>
+  <a class="proj-card proj-link"
+     href="https://docs.google.com/document/d/1o0-bFrxXejnF2Rc6oAK_qTpC2oxxbGKL_Lp9kkK53pQ/edit?usp=sharing"
+     target="_blank" rel="noopener">
+    <div class="tile" style="height:110px">Cartilage Regeneration (MSCs)</div>
+    <div class="muted" style="font-size:14px;margin-top:8px">
+      Research report & figures (Google Docs)
+    </div>
+    <div style="margin-top:8px">
+      <span class="chip">MSCs</span>
+      <span class="chip">Cartilage</span>
+      <span class="chip">Report</span>
+    </div>
+  </a>
+</div>
       </div>
     </div>
   </section>
@@ -315,16 +356,26 @@
   </div>
 
   <!-- RESEARCH -->
-  <section id="research" class="section reveal">
-    <div class="container">
-      <h2>Research</h2>
-      <div class="card" style="padding:18px">
-        <h3 style="margin:0">Cartilage Regeneration with Mesenchymal Stem Cells</h3>
-        <p class="muted" style="margin:10px 0 14px;max-width:900px">
-          Collaborative study with a medical student (Egypt) on regenerative cartilage repair and how new tissue integrates
-          with subchondral bone. Delivered a comprehensive report; manuscript in preparation.
-        </p>
-      </div>
+  <!-- RESEARCH -->
+<section id="research" class="section reveal">
+  <div class="container">
+    <h2>Research</h2>
+
+    <!-- Glowing animated line -->
+    <div class="glow-line reveal"></div>
+
+  </div>
+</section>
+
+
+    <!-- Animated dots filler -->
+    <div class="mini-anim">
+      <span></span><span></span><span></span>
+    </div>
+
+  </div>
+</section>
+
     </div>
   </section>
 
@@ -540,6 +591,18 @@
       card.style.setProperty('--my', 0);
     });
   });
+  // Smooth transition before opening project link
+document.querySelectorAll('.proj-link').forEach(card => {
+  card.addEventListener('click', (e) => {
+    e.preventDefault(); // stop immediate navigation
+    card.classList.add('clicked');
+    setTimeout(() => {
+      window.open(card.href, '_blank');
+      card.classList.remove('clicked');
+    }, 250); // wait for animation
+  });
+});
+
 </script>
 
 </body>

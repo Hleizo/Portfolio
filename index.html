@@ -43,14 +43,56 @@ html[data-theme="light"]{
   --glow:0 0 0 rgba(0,0,0,0);
 }
 
+/* Base & typography polish */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0; color:var(--text);
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-  line-height:1.6; overflow-x:hidden;
+  line-height:1.65; overflow-x:hidden;
   background:var(--bg);
+  letter-spacing: 0.1px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
+p{margin:0 0 .75rem}
+a{color:inherit; text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+.section{padding:84px 0}
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  backdrop-filter: blur(8px);
+}
+.btn{
+  position:relative;
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:12px 18px; border-radius:999px; border:1px solid transparent;
+  font-weight:600; letter-spacing:.2px;
+  transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s, filter .22s, background .22s;
+  overflow:hidden; cursor:pointer;
+}
+.btn-primary{background:var(--primary); color:var(--ink)}
+.btn-primary:hover{filter:brightness(.98); box-shadow:var(--glow)}
+.btn-outline{border-color:color-mix(in srgb, var(--primary-2) 60%, transparent); background:transparent}
+.btn-outline:hover{background:color-mix(in srgb, var(--primary-2) 16%, transparent); border-color:var(--primary-2)}
+.btn-ghost{border-color:color-mix(in srgb, var(--accent) 45%, transparent)}
+.btn-ghost:hover{background:color-mix(in srgb, var(--accent) 14%, transparent); border-color:var(--accent)}
+.btn:active{transform:scale(.96)}
+.badge{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted)}
+.muted{color:var(--muted)}
+h2{font-size:30px;margin:0 0 16px}
+
+/* Magnetic hover (subtle professional) */
+.btn::after{
+  content:"";
+  position:absolute; inset:-120%;
+  background: radial-gradient(140px 100px at var(--mx,50%) var(--my,50%), color-mix(in srgb, #fff 12%, transparent), transparent 60%);
+  opacity: 0; transition: opacity .2s ease;
+}
+.btn:hover::after{ opacity: .35; }
 
 /* ===== animated background (mesh + grid) ===== */
 .bg-anim, .bg-grid{
@@ -63,10 +105,7 @@ body{
   animation: drift 20s ease-in-out infinite alternate;
   filter: saturate(1.05);
 }
-@keyframes drift{
-  0%{ transform:translateY(0) }
-  100%{ transform:translateY(-18px) }
-}
+@keyframes drift{ 0%{ transform:translateY(0) } 100%{ transform:translateY(-18px) } }
 .bg-grid{
   background-image:
     linear-gradient(transparent 95%, color-mix(in srgb, var(--border) 50%, transparent) 0),
@@ -75,40 +114,7 @@ body{
   opacity:.08;
   animation: gridShift 18s linear infinite;
 }
-@keyframes gridShift{
-  from{ background-position:0 0, 0 0 }
-  to{   background-position:280px 0, 0 280px }
-}
-
-/* =========================
-   GENERIC
-   ========================= */
-a{color:inherit; text-decoration:none}
-.container{max-width:1100px;margin:0 auto;padding:0 20px}
-.section{padding:84px 0}
-.card{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  backdrop-filter: blur(8px);
-}
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:12px 18px; border-radius:999px; border:1px solid transparent;
-  font-weight:600; letter-spacing:.2px;
-  transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s, filter .22s, background .22s;
-}
-.btn-primary{background:var(--primary); color:var(--ink)}
-.btn-primary:hover{filter:brightness(.98); box-shadow:var(--glow)}
-.btn-outline{border-color:color-mix(in srgb, var(--primary-2) 60%, transparent); background:transparent}
-.btn-outline:hover{background:color-mix(in srgb, var(--primary-2) 16%, transparent); border-color:var(--primary-2)}
-.btn-ghost{border-color:color-mix(in srgb, var(--accent) 45%, transparent)}
-.btn-ghost:hover{background:color-mix(in srgb, var(--accent) 14%, transparent); border-color:var(--accent)}
-.btn:active{transform:scale(.96)}
-.badge{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted)}
-.muted{color:var(--muted)}
-h2{font-size:30px;margin:0 0 16px}
+@keyframes gridShift{ from{ background-position:0 0, 0 0 } to{ background-position:280px 0, 0 280px } }
 
 /* =========================
    HEADER — glass bar with pills
@@ -168,22 +174,36 @@ h2{font-size:30px;margin:0 0 16px}
 .w.show{animation:wIn .6s cubic-bezier(.2,.8,.2,1) forwards}
 @keyframes wIn{to{opacity:1; transform:translateY(0)}}
 .underline{position:relative; display:inline-block}
-.underline::after{content:""; position:absolute; left:0; right:0; bottom:-4px; height:3px; border-radius:2px; background:linear-gradient(90deg, var(--primary), var(--primary-2)); transform:scaleX(0); transform-origin:left; animation:uline .7s .3s cubic-bezier(.2,.8,.2,1) forwards}
-@keyframes uline{to{transform:scaleX(1)}}
+/* Dual sweep underline */
+.underline::after{
+  content:""; position:absolute; left:0; right:0; bottom:-6px; height:3px; border-radius:2px;
+  background:
+    linear-gradient(90deg, transparent, var(--primary-2), transparent),
+    linear-gradient(90deg, transparent, var(--accent), transparent);
+  background-size: 140% 100%, 200% 100%;
+  background-position: -20% 0, 120% 0;
+  animation: ulineA .9s .2s cubic-bezier(.2,.8,.2,1) forwards,
+             ulineB 1.3s .1s cubic-bezier(.2,.8,.2,1) forwards;
+}
+@keyframes ulineA{to{background-position: 20% 0}}
+@keyframes ulineB{to{background-position: 0% 0}}
 
-/* subtle pulse-wave divider (replaces 3 dots) */
-.pulse-wave{
-  position:relative; height:6px; border-radius:6px; overflow:hidden; margin:26px 0 4px; opacity:.9;
-  background:linear-gradient(90deg, color-mix(in srgb,var(--primary-2) 20%, transparent), transparent 20%, transparent 80%, color-mix(in srgb,var(--primary-2) 20%, transparent));
+/* ECG stripe (hero divider) */
+.ecg{
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  margin: 26px 0 6px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--primary-2) 50%, transparent), transparent);
+  overflow: hidden;
 }
-.pulse-wave::before{
-  content:""; position:absolute; inset:0;
-  background:linear-gradient(90deg, transparent, var(--primary-2), transparent);
-  background-size:220px 100%;
-  animation:pulseMove 2.2s linear infinite;
-  filter:blur(1px);
+.ecg::before{
+  content:""; position:absolute; left:-40%; top:0; bottom:0; width:40%;
+  background: linear-gradient(90deg, transparent, var(--primary-2), transparent);
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--primary-2) 65%, transparent));
+  animation: ecgRun 2.4s linear infinite;
 }
-@keyframes pulseMove{ from{background-position:-220px 0} to{background-position:220px 0} }
+@keyframes ecgRun { to { left: 100%; } }
 
 /* =========================
    HIGHLIGHTS
@@ -219,8 +239,9 @@ h2{font-size:30px;margin:0 0 16px}
 .proj-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 .proj-card{
   position:relative; overflow:hidden; border-radius:16px; border:1px solid var(--border);
-  background:var(--panel-soft); box-shadow:var(--shadow); transition:transform .25s, box-shadow .25s, opacity .25s;
+  background:var(--panel-soft); box-shadow:var(--shadow);
   display:block; padding:0;
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s, opacity .25s;
 }
 .proj-card:hover{transform:translateY(-2px); box-shadow:var(--glow)}
 .thumb{
@@ -234,8 +255,15 @@ h2{font-size:30px;margin:0 0 16px}
 .thumb-emoji{font-size:44px; filter: drop-shadow(0 10px 16px rgba(0,0,0,.35));}
 .proj-body{padding:12px 14px 14px}
 .proj-title{font-weight:800; color:var(--primary-2); margin-bottom:6px}
-.proj-tags .chip{margin-right:6px}
+.proj-tags .badge{margin-right:6px}
 .proj-card.clicked{transform:scale(.97); opacity:.75}
+.ripple{
+  position:absolute; border-radius:50%; transform:scale(0); opacity:.45;
+  background:radial-gradient(circle, var(--primary-2) 0%, transparent 60%);
+  pointer-events: none;
+  animation:ripple .45s ease-out forwards;
+}
+@keyframes ripple{ to{ transform:scale(8); opacity:0 } }
 
 /* =========================
    EXPERIENCE
@@ -256,17 +284,37 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
 .contact-actions{display:flex;flex-wrap:wrap;gap:10px}
 .wide-btn{min-width:160px}
 
-/* Scroll reveal */
-.reveal{opacity:0; transform:translateY(14px); transition:opacity .55s ease, transform .55s ease}
-.reveal.show{opacity:1; transform:translateY(0)}
+/* Smooth, premium reveal */
+.reveal{
+  opacity: 0;
+  transform: translateY(14px) scale(0.995);
+  filter: blur(6px);
+  transition:
+    opacity .6s cubic-bezier(.2,.8,.2,1),
+    transform .6s cubic-bezier(.2,.8,.2,1),
+    filter .6s cubic-bezier(.2,.8,.2,1);
+  will-change: opacity, transform, filter;
+}
+.reveal.show{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
 
 /* MOBILE */
 @media (max-width: 930px){
   .section{padding:68px 0}
+  .container { padding: 0 16px; }
   .hero{padding:110px 0 30px}
-  .hero h1{font-size:34px}
-  .highlights{grid-template-columns:1fr}
+  .hero h1{font-size:34px; line-height:1.2}
+  .cta-row .btn { width: 100%; }
+  .highlights{grid-template-columns:1fr; gap:10px}
+  .proj-grid{grid-template-columns:1fr}
+  .proj-card{border-radius:14px}
+  .proj-title{font-size:1.05rem}
   .contact-grid{grid-template-columns:1fr}
+  .contact-actions .btn{width:100%}
+  input, textarea { font-size:16px; } /* avoid iOS zoom */
 }
 @media (prefers-reduced-motion: reduce){ *{animation:none!important; transition:none!important} html{scroll-behavior:auto} }
 </style>
@@ -308,15 +356,16 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
   <section class="hero container">
     <h1>
       <span class="w">Hi,</span> <span class="w">I’m</span> <span class="w">Hasan</span> <span class="w">Zeineddin.</span><br/>
-      <span class="w">Engineering</span> <span class="w">meets</span> <span class="w underline">medicine</span> <span class="w">where</span> <span class="w">ideas</span> <span class="w">become</span> <span class="w">life-saving</span> <span class="w underline">solutions.</span>
+      <span class="w">Engineering meets</span> <span class="w underline">medicine</span>
+      <span class="w">— where ideas become</span> <span class="w">reliable, life-saving</span> <span class="w underline">solutions.</span>
     </h1>
     <p>Biomedical engineering with purpose, precision, and impact.</p>
 
-    <div class="pulse-wave" aria-hidden="true"></div>
+    <div class="ecg" aria-hidden="true"></div>
 
     <div class="cta-row">
       <a class="btn btn-primary" href="https://drive.google.com/file/d/1tJJ_Tq1KqUxplsy2WAcBwJKNIzPHRS7-/view?usp=sharing" target="_blank" rel="noopener">View CV</a>
-      <a class="btn btn-outline" href="#projects">See Projects</a>
+      <a class="btn btn-outline" href="#projects">See Project</a>
       <a class="btn btn-ghost" href="#contact">Contact</a>
     </div>
 
@@ -341,11 +390,12 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
       <h2>Projects</h2>
 
       <div class="grid proj-grid">
-        <!-- Your real project with smooth click -->
+        <!-- Your real project with smooth tilt + ripple click -->
         <a class="proj-card proj-link"
            href="https://docs.google.com/document/d/1o0-bFrxXejnF2Rc6oAK_qTpC2oxxbGKL_Lp9kkK53pQ/edit?usp=sharing"
            target="_blank" rel="noopener">
           <div class="thumb">
+            <!-- You can replace this emoji with an image by putting <img src="project-mscs.jpg" alt="MSCs research" style="width:100%;height:100%;object-fit:cover;border-bottom:1px dashed var(--border)"> -->
             <div class="thumb-emoji">🧬</div>
           </div>
           <div class="proj-body">
@@ -404,13 +454,10 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
   <section id="about" class="section reveal">
     <div class="container">
       <h2>About</h2>
-      <p class="muted" style="max-width:880px">
-        Biomedical engineering lets me connect problem-solving with real healthcare needs.
-        I value clarity, steady progress, and teamwork — and I’m building toward practical,
-        reliable solutions that help people.
-        Biomedical engineering lets me connect problem-solving with real healthcare needs. <br/>
-        I value clarity, steady progress, and teamwork. <br/>
-        My Goal is to build practical, reliable solutions that help people.
+      <p class="about-3lines">
+        Biomedical engineering lets me connect problem-solving with meaningful healthcare needs.<br/>
+        I focus on clarity, steady progress, and collaboration in every project I take on.<br/>
+        My goal is to build practical, reliable solutions that improve health and make a real difference.
       </p>
     </div>
   </section>
@@ -538,7 +585,7 @@ links.forEach(link=>{
 });
 const sections = [...document.querySelectorAll('section[id]')];
 window.addEventListener('scroll', ()=>{
-  let current = '#projects';
+  let current = '#' + (sections[0]?.id || 'projects'); // start at first section
   const offset = header.getBoundingClientRect().height + 20;
   sections.forEach(sec=>{ if (window.scrollY >= sec.offsetTop - offset - 10) current = '#'+sec.id; });
   markActive(current);
@@ -553,21 +600,48 @@ document.querySelectorAll('.h-card').forEach(card=>{
     card.style.setProperty('--mx', mx.toFixed(3));
     card.style.setProperty('--my', my.toFixed(3));
   });
-  card.addEventListener('mouseleave', ()=>{
-    card.style.setProperty('--mx', 0);
-    card.style.setProperty('--my', 0);
-  });
+  card.addEventListener('mouseleave', ()=>{ card.style.setProperty('--mx', 0); card.style.setProperty('--my', 0); });
 });
 
-// Smooth project click
+// Magnetic highlight on buttons
+document.querySelectorAll('.btn').forEach(b=>{
+  b.addEventListener('mousemove', e=>{
+    const r = b.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * 100 + '%';
+    const y = ((e.clientY - r.top)  / r.height) * 100 + '%';
+    b.style.setProperty('--mx', x);
+    b.style.setProperty('--my', y);
+  });
+  b.addEventListener('mouseleave', ()=>{ b.style.removeProperty('--mx'); b.style.removeProperty('--my'); });
+});
+
+// Project tilt + ripple + smooth open
 document.querySelectorAll('.proj-link').forEach(card => {
+  card.addEventListener('mousemove', e=>{
+    const r = card.getBoundingClientRect();
+    const dx = (e.clientX - (r.left + r.width/2)) / r.width;
+    const dy = (e.clientY - (r.top  + r.height/2)) / r.height;
+    card.style.transform = `rotateX(${(-dy*2).toFixed(2)}deg) rotateY(${(dx*3).toFixed(2)}deg) translateY(-2px)`;
+  });
+  card.addEventListener('mouseleave', ()=> card.style.transform = '');
+
   card.addEventListener('click', (e) => {
     e.preventDefault();
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX || (r.left + r.width/2)) - r.left;
+    const y = (e.clientY || (r.top  + r.height/2)) - r.top;
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    ripple.style.left = x + 'px';
+    ripple.style.top  = y + 'px';
+    ripple.style.width = ripple.style.height = Math.max(r.width, r.height) + 'px';
+    card.appendChild(ripple);
     card.classList.add('clicked');
     setTimeout(() => {
       window.open(card.href, '_blank', 'noopener');
       card.classList.remove('clicked');
-    }, 240);
+      ripple.remove();
+    }, 320);
   });
 });
 </script>

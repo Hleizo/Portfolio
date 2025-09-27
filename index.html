@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Hasan Zeineddin — Biomedical Engineering</title>
-<meta name="description" content="Hasan Zeineddin — biomedical engineering portfolio: projects, experience, skills and contact." />
+<meta name="description" content="Hasan Zeineddin — biomedical engineering portfolio: projects, research, experience, skills and contact." />
 
 <style>
 /* =========================
@@ -337,10 +337,11 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
       </button>
 
       <nav id="siteNav" class="nav" aria-label="primary">
-        <!-- ordered by importance -->
-        <a href="#projects" class="link">Projects</a>
-        <a href="#experience" class="link">Experience</a>
+        <!-- ORDER: About → Projects → Research → Experience → Skills → Courses → Contact -->
         <a href="#about" class="link">About</a>
+        <a href="#projects" class="link">Projects</a>
+        <a href="#research" class="link">Research</a>
+        <a href="#experience" class="link">Experience</a>
         <a href="#skills" class="link">Skills</a>
         <a href="#courses" class="link">Courses</a>
         <a href="#contact" class="link">Contact</a>
@@ -352,12 +353,12 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
 
 <main id="top">
 
-  <!-- HERO -->
+  <!-- HERO (always first visually) -->
   <section class="hero container">
     <h1>
       <span class="w">Hi,</span> <span class="w">I’m</span> <span class="w">Hasan</span> <span class="w">Zeineddin.</span><br/>
       <span class="w">Engineering meets</span> <span class="w underline">medicine</span>
-      <span class="w">where ideas become</span> <span class="w">life-saving</span> <span class="w underline">solutions.</span>
+      <span class="w">— where ideas become</span> <span class="w">reliable, life-saving</span> <span class="w underline">solutions.</span>
     </h1>
     <p>Biomedical engineering with purpose, precision, and impact.</p>
 
@@ -369,18 +370,30 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
       <a class="btn btn-ghost" href="#contact">Contact</a>
     </div>
 
-    <!-- Highlights -->
+    <!-- Highlights (quick credibility) -->
     <div class="highlights" aria-label="Professional highlights">
+      <a class="h-card" href="#about">
+        <div class="h-ico" aria-hidden="true">🎓</div>
+        <div class="h-title">Biomedical Engineering (GJU)</div>
+        <div class="h-sub">Hands-on and lab-driven, with a focus on clear outcomes.</div>
+      </a>
       <a class="h-card" href="#projects">
-        <div class="h-ico" aria-hidden="true">🧪</div>
-        <div class="h-title">Research into practice</div>
-        <div class="h-sub">Turning complex ideas into clear outputs.</div>
+        <div class="h-ico" aria-hidden="true">🧬</div>
+        <div class="h-title">MSCs Cartilage Research</div>
+        <div class="h-sub">Regenerative repair & tissue integration; manuscript in preparation.</div>
       </a>
-      <a class="h-card" href="#experience">
-        <div class="h-ico" aria-hidden="true">🤝</div>
-        <div class="h-title">Technological Collaboration</div>
-        <div class="h-sub">Learning by doing with teams and events.</div>
-      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT (first content section) -->
+  <section id="about" class="section reveal">
+    <div class="container">
+      <h2>About</h2>
+      <p class="about-3lines" style="max-width:880px">
+        Biomedical engineering lets me connect problem-solving with meaningful healthcare needs.<br/>
+        I focus on clarity, steady progress, and collaboration in every project I take on.<br/>
+        My goal is to build practical, reliable solutions that improve health and make a real difference.
+      </p>
     </div>
   </section>
 
@@ -390,12 +403,13 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
       <h2>Projects</h2>
 
       <div class="grid proj-grid">
-        <!-- Your real project with smooth tilt + ripple click -->
+        <!-- Single real project with smooth tilt + ripple open -->
         <a class="proj-card proj-link"
            href="https://docs.google.com/document/d/1o0-bFrxXejnF2Rc6oAK_qTpC2oxxbGKL_Lp9kkK53pQ/edit?usp=sharing"
            target="_blank" rel="noopener">
           <div class="thumb">
-            <!-- You can replace this emoji with an image by putting <img src="project-mscs.jpg" alt="MSCs research" style="width:100%;height:100%;object-fit:cover;border-bottom:1px dashed var(--border)"> -->
+            <!-- Replace emoji with an image by uploading: project-mscs.jpg, then:
+                 <img src="project-mscs.jpg" alt="MSCs research" style="width:100%;height:100%;object-fit:cover"> -->
             <div class="thumb-emoji">🧬</div>
           </div>
           <div class="proj-body">
@@ -410,6 +424,14 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
         </a>
       </div>
 
+    </div>
+  </section>
+
+  <!-- RESEARCH (identity + visual) -->
+  <section id="research" class="section reveal">
+    <div class="container">
+      <h2>Research</h2>
+      <div class="ecg" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -447,18 +469,6 @@ input:focus, textarea:focus{border-color:var(--primary-2); box-shadow:0 0 0 3px 
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="section reveal">
-    <div class="container">
-      <h2>About</h2>
-      <p class="about-3lines">
-        Biomedical engineering lets me connect problem-solving with meaningful healthcare needs.<br/>
-        I focus on clarity, steady progress, and collaboration in every project I take on.<br/>
-        My goal is to build practical, reliable solutions that improve health and make a real difference.
-      </p>
     </div>
   </section>
 
@@ -568,7 +578,7 @@ const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries)=> entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); }), {threshold:.12});
 revealEls.forEach(el=> io.observe(el));
 
-// Smooth scroll + active nav
+// Smooth scroll + active nav (starts at first section = about)
 const header = document.querySelector('.header');
 const links = document.querySelectorAll('.nav a.link');
 function markActive(hash){ links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === hash)); }
@@ -585,7 +595,7 @@ links.forEach(link=>{
 });
 const sections = [...document.querySelectorAll('section[id]')];
 window.addEventListener('scroll', ()=>{
-  let current = '#' + (sections[0]?.id || 'projects'); // start at first section
+  let current = '#' + (sections[0]?.id || 'about'); // start at ABOUT
   const offset = header.getBoundingClientRect().height + 20;
   sections.forEach(sec=>{ if (window.scrollY >= sec.offsetTop - offset - 10) current = '#'+sec.id; });
   markActive(current);
